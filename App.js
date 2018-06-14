@@ -1,21 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import Newsfeed from './app/page/Newsfeed.js';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Halo oke, namanya juga nge test ya</Text>
-      </View>
+      <Newsfeed />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
