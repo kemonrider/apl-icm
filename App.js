@@ -1,10 +1,11 @@
 import React from 'react';
-import Newsfeed from './app/page/Newsfeed.js';
+
+import OnboardingPage from './src/page/Onboarding';
 
 export default class App extends React.Component {
   render() {
     return (
-      <Newsfeed />
+      <OnboardingPage />
     );
   }
 }
