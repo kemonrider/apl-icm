@@ -7,11 +7,21 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../lib/styles';
 
 export default class OnboardingPage extends React.Component {  
-  constructor(props){
-    super(props);
+  navigateToLogin = () => {
+    // NOTE (2018-06-23):
+    // Currently this function to navigate is a temporary hack
+    // to fix the memory leak issue.
+    // Same issue has already been posted here:
+    // https://github.com/jfilter/react-native-onboarding-swiper/issues/20
+
+    // TODO:
+    // Fix the redirect once the PR is done.
+    setTimeout(() => {
+      this.props.navigation.navigate('LoginPage')
+    }, 600)
   }
   
-  render() {    
+  render() {
     return (
       <Onboarding
         pages={[
@@ -48,6 +58,8 @@ export default class OnboardingPage extends React.Component {
         }}
         controlStatusBar={false}
         bottomBarHeight={50}
+        onSkip={this.navigateToLogin}
+        onDone={this.navigateToLogin}
       />
     )
   }

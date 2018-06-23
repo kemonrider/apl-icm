@@ -25,7 +25,7 @@ export default class NewsFeedPage extends React.Component {
     }
     return renderedNewsList;
   }
-  
+
   // render component
   render() {
     return (

@@ -9,28 +9,48 @@ import NewsDetailPage from './src/page/NewsDetail';
 import LoginPage from './src/page/Login';
 import SplashPage from './src/page/Splash';
 
-export default class App extends React.Component {
+export default class App extends React.Component {  
   render() {
-    return (
-      <NewsFeedPage />
-    );
+    const Layout = RootNavigation;
+    return <Layout />;
   }
 }
 
-const MainRoutes = createSwitchNavigator(
+/**
+ * Navigations
+ */
+
+// Root Navigation
+const RootNavigation = createSwitchNavigator(
   {
     Splash: SplashPage,
     Onboarding: OnboardingPage,
-    Login: LoginPage
+    LoginPage: LoginPage,
+    NewsFeed: NewsFeedPage
   },
   {
     initialRouteName: 'Splash'
   }
 )
 
-const NewsStack = createStackNavigator(
+// News Navigation
+const NewsNavigation = createStackNavigator(
   {
     NewsFeed: NewsFeedPage,
     NewsDetail: NewsDetailPage
   }
 )
+
+// Bill Navigation
+// const BillNavigation = createStackNavigator(
+//   {
+    
+//   }
+// )
+
+// Feedback Navigation
+// const FeedbackNavigation = createStackNavigator(
+//   {
+
+//   }
+// )

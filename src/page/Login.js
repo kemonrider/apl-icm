@@ -19,7 +19,7 @@ export default class LoginPage extends React.Component {
             <TextInput placeholder="password" />
           </View>
           <View style={styles.formButtonWrapper}>
-            <TouchableOpacity style={styles.formButton}>
+            <TouchableOpacity style={styles.formButton} onPress={() => this.props.navigation.navigate('NewsFeed')}>
               <Text style={{ color: colors.mainColor, fontWeight: 'bold' }}>MASUK</Text>
             </TouchableOpacity>
           </View>
