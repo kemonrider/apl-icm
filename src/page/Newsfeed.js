@@ -3,7 +3,7 @@ import { ScrollView, Image, Text, StyleSheet } from 'react-native';
 
 import News from '../components/News';
 
-export default class NewsfeedPage extends React.Component {
+export default class NewsFeedPage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -52,6 +52,12 @@ const newsList = [
   },
   {
     id: 3,
+    title: "Diskon 10% Untuk Keperluan Dapur Anda di Ranch Market Selama Bulan Maret",
+    image: "../assets/images/news/sample-news-image.jpg",
+    tag: "Berita"
+  },
+  {
+    id: 4,
     title: "Diskon 10% Untuk Keperluan Dapur Anda di Ranch Market Selama Bulan Maret",
     image: "../assets/images/news/sample-news-image.jpg",
     tag: "Berita"
