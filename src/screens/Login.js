@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView 
 
 import { colors } from '../lib/styles';
 
-export default class LoginPage extends React.Component {
+export default class LoginScreen extends React.Component {
   render() {
     return(
       <ScrollView style={styles.pageWrapper}>
@@ -20,7 +20,7 @@ export default class LoginPage extends React.Component {
           </View>
           <View style={styles.formButtonWrapper}>
             <TouchableOpacity style={styles.formButton} onPress={() => this.props.navigation.navigate('NewsFeed')}>
-              <Text style={{ color: colors.mainColor, fontWeight: 'bold' }}>MASUK</Text>
+              <Text style={{ color: colors.orange, fontWeight: 'bold' }}>MASUK</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.formNavigation}>
@@ -41,7 +41,7 @@ export default class LoginPage extends React.Component {
 
 const styles = StyleSheet.create({
   pageWrapper: {
-    backgroundColor: colors.mainColor,
+    backgroundColor: colors.orange,
     padding: 15,
   },
   formHeader: {

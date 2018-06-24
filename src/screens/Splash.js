@@ -3,7 +3,7 @@ import { View, Image, StyleSheet } from 'react-native';
 
 import { colors } from '../lib/styles';
 
-export default class SplashPage extends React.Component {
+export default class SplashScreen extends React.Component {
   constructor(props){
     super(props);
   }
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   pageWrapper: {
     flex: 1,
     height: '100%',
-    backgroundColor: colors.secondaryColor,
+    backgroundColor: colors.purple,
     justifyContent: 'center',
     alignItems: 'center'
   }

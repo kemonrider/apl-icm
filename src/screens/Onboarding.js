@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { colors } from '../lib/styles';
 
-export default class OnboardingPage extends React.Component {  
+export default class OnboardingScreen extends React.Component {  
   navigateToLogin = () => {
     // NOTE (2018-06-23):
     // Currently this function to navigate is a temporary hack
@@ -26,25 +26,25 @@ export default class OnboardingPage extends React.Component {
       <Onboarding
         pages={[
           {
-            backgroundColor: colors.mainColor,
+            backgroundColor: colors.orange,
             image: <Image source={require('../assets/images/onboarding/onboarding-1.png')} />,
             title: 'Lihat dan Bayar Tagihan',
             subtitle: 'Lunasi tagihan listrik, air, telepon, hingga internet tanpa ribet langsung di ponsel'
           },
           {
-            backgroundColor: colors.mainColor,
+            backgroundColor: colors.orange,
             image: <Image source={require('../assets/images/onboarding/onboarding-2.png')} />,
             title: 'Selalu Up-to-date',
             subtitle: 'Dapatkan berita dan informasi terbaru seputar hunian Anda dalam newsfeed'
           },
           {
-            backgroundColor: colors.mainColor,
+            backgroundColor: colors.orange,
             image: <Image source={require('../assets/images/onboarding/onboarding-3.png')} />,
             title: 'Belanja Kebutuhan Harian',
             subtitle: 'Praktis belanja makanan, minuman, kebutuhan dapur, dan kebutuhan harian lainnya'
           },
           {
-            backgroundColor: colors.mainColor,
+            backgroundColor: colors.orange,
             image: <Image source={require('../assets/images/onboarding/onboarding-4.png')} />,
             title: 'Booking Fasilitas Umum',
             subtitle: 'Booking lapangan tenis, lapangan basket, dan balai warga makin mudah'

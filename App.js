@@ -1,47 +1,71 @@
 import React from 'react';
-
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
-// pages components
-import OnboardingPage from './src/page/Onboarding';
-import NewsFeedPage from './src/page/NewsFeed';
-import NewsDetailPage from './src/page/NewsDetail';
-import LoginPage from './src/page/Login';
-import SplashPage from './src/page/Splash';
+/**
+ * Screens Component
+ */
+// splash pages
+import SplashScreen from './src/screens/Splash';
+// onboarding
+import OnBoardingScreen from './src/screens/Onboarding';
+// news pages
+import NewsFeedScreen from './src/screens/NewsFeed';
+import NewsDetailScreen from './src/screens/NewsDetail';
+// auth pages
+import LoginScreen from './src/screens/Login';
+import RegisterScreen from './src/screens/Register';
+// billing pages
+import BillingDetailScreen from './src/screens/BillingDetail';
+import BillingHistoryScreen from './src/screens/BillingHistory';
 
 export default class App extends React.Component {  
   render() {
-    const Layout = RootNavigation;
-    return <Layout />;
+    // const Layout = RootNavigation; // root navigation
+    // const Layout = NewsNavigation; // news navigation
+    // return <Layout />;
+
+    // return NewsDetailScreen;
+    return <NewsDetailScreen />;
   }
 }
 
 /**
- * Navigations
+ * Navigation
+ * Using react-navigation
  */
 
 // Root Navigation
-const RootNavigation = createSwitchNavigator(
-  {
-    Splash: SplashPage,
-    Onboarding: OnboardingPage,
-    LoginPage: LoginPage,
-    NewsFeed: NewsFeedPage
-  },
-  {
-    initialRouteName: 'Splash'
-  }
-)
+// const RootNavigation = createSwitchNavigator(
+//   {
+//     Splash: SplashScreen,
+//     Onboarding: OnBoardingScreen,
+//     Login: LoginScreen,
+//   },
+//   {
+//     initialRouteName: 'Splash'
+//   }
+// )
+
+// Auth Navigation
+// const LoginNavigation = createStackNavigator(
+//   {
+//     Login: LoginScreen,
+//     Register: RegisterScreen,
+//   }
+// )
 
 // News Navigation
-const NewsNavigation = createStackNavigator(
-  {
-    NewsFeed: NewsFeedPage,
-    NewsDetail: NewsDetailPage
-  }
-)
+// const NewsNavigation = createStackNavigator(
+//   {
+//     NewsFeed: NewsFeedScreen,
+//     NewsDetail: NewsDetailScreen
+//   },
+//   {
+//     initialRouteName: 'NewsFeed'
+//   }
+// )
 
-// Bill Navigation
+// Billing Navigation
 // const BillNavigation = createStackNavigator(
 //   {
     

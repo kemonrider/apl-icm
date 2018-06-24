@@ -1,9 +1,9 @@
 import React from 'react';
-import { ScrollView, Image, Text, StyleSheet } from 'react-native';
+import { ScrollView, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import News from '../components/News';
 
-export default class NewsFeedPage extends React.Component {
+export default class NewsFeedScreen extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -11,26 +11,29 @@ export default class NewsFeedPage extends React.Component {
     }
   }
 
-  renderNewsList() {
+  renderNewsFeed() {
     const renderedNewsList = [];
     for(let i = 0; i < this.state.newsList.length; i++){
       renderedNewsList.push(
-        <News
+        <TouchableOpacity 
           key={this.state.newsList[i].id}
-          image={this.state.newsList[i].image}
-          title={this.state.newsList[i].title}
-          tag={this.state.newsList[i].tag}
-        />
+          onPress={this.props.navigation.navigate('NewsDetail', { newsId: this.state.newsList[i].id })}
+        >
+          <News
+            image={this.state.newsList[i].image}
+            title={this.state.newsList[i].title}
+            tag={this.state.newsList[i].tag}
+          />
+        </TouchableOpacity>
       )
     }
     return renderedNewsList;
   }
 
-  // render component
   render() {
     return (
       <ScrollView>
-        {this.renderNewsList()}
+        {this.renderNewsFeed()}
       </ScrollView>
     )
   }
