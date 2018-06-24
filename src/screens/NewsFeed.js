@@ -20,9 +20,7 @@ export default class NewsFeedScreen extends React.Component {
           // onPress={this.props.navigation.navigate('NewsDetail', { newsId: this.state.newsList[i].id })}
         >
           <News
-            image={this.state.newsList[i].image}
-            title={this.state.newsList[i].title}
-            tag={this.state.newsList[i].tag}
+            {...this.state.newsList[i]}
           />
         </TouchableOpacity>
       )
@@ -49,19 +47,19 @@ const newsList = [
   }, 
   {
     id: 2,
-    title: "Diskon 10% Untuk Keperluan Dapur Anda di Ranch Market Selama Bulan Maret",
+    title: "Diskon 20% Untuk Keperluan Dapur Anda di Ranch Market Selama Bulan Maret",
     image: "../assets/images/news/sample-news-image.jpg",
     tag: "Berita"
   },
   {
     id: 3,
-    title: "Diskon 10% Untuk Keperluan Dapur Anda di Ranch Market Selama Bulan Maret",
+    title: "Diskon 30% Untuk Keperluan Dapur Anda di Ranch Market Selama Bulan Maret",
     image: "../assets/images/news/sample-news-image.jpg",
     tag: "Berita"
   },
   {
     id: 4,
-    title: "Diskon 10% Untuk Keperluan Dapur Anda di Ranch Market Selama Bulan Maret",
+    title: "Diskon 40% Untuk Keperluan Dapur Anda di Ranch Market Selama Bulan Maret",
     image: "../assets/images/news/sample-news-image.jpg",
     tag: "Berita"
   },

@@ -1,39 +1,45 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const News = props => {
-  return (
-    <View style={styles.newsWrapper}>
-      <View style={styles.newsMain}>
-        <View style={styles.newsTitleWrapper}>
-          <Text style={styles.newsTitle}>{props.title}</Text>
+export default class News extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    return (
+      <View style={styles.newsWrapper}>
+        <View style={styles.newsMain}>
+          <View style={styles.newsTitleWrapper}>
+            <Text style={styles.newsTitle}>{this.props.title}</Text>
+          </View>
+          <View style={styles.newsGradient}>
+            <Image source={require('../../assets/images/news/news-image-overlay.png')} />
+          </View>
+          <View style={styles.newsImage}>
+            <Image source={require('../../assets/images/news/sample-news-image.jpg')} />
+          </View>
         </View>
-        <View style={styles.newsGradient}>
-          <Image source={require('../../assets/images/news/news-image-overlay.png')} />
-        </View>
-        <View style={styles.newsImage}>
-          <Image source={require('../../assets/images/news/sample-news-image.jpg')} />
+        <View style={styles.newsFooter}>
+          <View style={styles.newsTagWrapper}>
+            <Icon name="local-offer" size={iconStyle.size} />
+            <Text style={styles.newsTag}> {this.props.tag} </Text>
+          </View>
+          <View style={{ flex: 0.25 }}></View>
+          <View style={styles.newsLikeWrapper}>
+            <Icon name="favorite" size={iconStyle.size} />
+            <Text style={styles.newsLike}> Suka </Text>
+          </View>
+          <View style={styles.newsShareWrapper}>
+            <Icon name="share" size={iconStyle.size} />
+            <Text style={styles.newsShare}> Bagikan </Text>
+          </View>
         </View>
       </View>
-      <View style={styles.newsFooter}>
-        <View style={styles.newsTagWrapper}>
-          <Icon name="local-offer" size={iconStyle.size} />
-          <Text style={styles.newsTag}> {props.tag} </Text>
-        </View>
-        <View style={{ flex: 0.25 }}></View>
-        <View style={styles.newsLikeWrapper}>
-          <Icon name="favorite" size={iconStyle.size} />
-          <Text style={styles.newsLike}> Suka </Text>
-        </View>
-        <View style={styles.newsShareWrapper}>
-          <Icon name="share" size={iconStyle.size} />
-          <Text style={styles.newsShare}> Bagikan </Text>
-        </View>
-      </View>
-    </View>
-  )
+    )
+  }
 };
 
 const iconStyle = {
@@ -97,5 +103,3 @@ const styles = StyleSheet.create({
   },
   newsShare: {}
 });
-
-export default News;
