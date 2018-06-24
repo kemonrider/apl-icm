@@ -17,7 +17,7 @@ export default class NewsFeedScreen extends React.Component {
       renderedNewsList.push(
         <TouchableOpacity 
           key={this.state.newsList[i].id}
-          onPress={this.props.navigation.navigate('NewsDetail', { newsId: this.state.newsList[i].id })}
+          // onPress={this.props.navigation.navigate('NewsDetail', { newsId: this.state.newsList[i].id })}
         >
           <News
             image={this.state.newsList[i].image}

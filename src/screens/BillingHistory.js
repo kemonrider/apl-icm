@@ -1,10 +1,73 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+
+import Billing from '../components/Billing';
 
 export default class BillingHistoryScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      billingHistory: billingHistory
+    }
+  }
+  
+  renderBillingHistory() {
+    const renderedBillingHistory = [];
+    for(let i = 0 ; i < this.state.billingHistory.length; i++){
+      renderedBillingHistory.push(
+        <Billing
+          {...this.state.billingHistory[i]}
+          key={this.state.billingHistory[i].id}
+        />
+      )
+    }
+    return renderedBillingHistory;
+  }
+  
   render(){
     return(
-      <Text>This is Billing History Screen</Text>
+      <ScrollView style={styles.pageWrapper}>
+        {this.renderBillingHistory()}
+      </ScrollView>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  pageWrapper: {},
+})
+
+const billingHistory = [
+  {
+    id: 1,
+    title: "Tagihan",
+    status: "BELUM DIBAYAR",
+    statusColor: '#D51A1A',
+    date: '30 June 2018',
+    amount: '1400000'
+  },
+  {
+    id: 2,
+    title: "Tagihan",
+    status: "BELUM DIBAYAR",
+    statusColor: '#F19100',
+    date: '30 June 2018',
+    amount: '1400000'
+  },
+  {
+    id: 3,
+    title: "Tagihan",
+    status: "BELUM DIBAYAR",
+    statusColor: '#D51A1A',
+    date: '30 June 2018',
+    amount: '1400000'
+  },
+  {
+    id: 4,
+    title: "Tagihan",
+    status: "BELUM DIBAYAR",
+    statusColor: '#F19100',
+    date: '30 June 2018',
+    amount: '1400000'
+  },
+]
