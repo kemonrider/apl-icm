@@ -25,7 +25,7 @@ export default class App extends React.Component {
     // return <Layout />;
 
     // return NewsDetailScreen;
-    return <NewsDetailScreen />;
+    return <RegisterScreen />;
   }
 }
 
