@@ -24,8 +24,7 @@ export default class App extends React.Component {
     // const Layout = NewsNavigation; // news navigation
     // return <Layout />;
 
-    // return NewsDetailScreen;
-    return <BillingHistoryScreen />;
+    return <BillingDetailScreen />;
   }
 }
 

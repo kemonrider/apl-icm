@@ -7,6 +7,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../lib/styles';
 
 export default class OnboardingScreen extends React.Component {  
+  constructor(props){
+    super(props);
+  }
+  
   navigateToLogin = () => {
     // NOTE (2018-06-23):
     // Currently this function to navigate is a temporary hack

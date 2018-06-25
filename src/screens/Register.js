@@ -4,6 +4,10 @@ import { Text, View, ScrollView, TextInput, StyleSheet, TouchableOpacity } from 
 import { colors } from '../lib/styles';
 
 export default class RegisterScreen extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  
   render(){
     return(
       <ScrollView style={styles.pageWrapper}>

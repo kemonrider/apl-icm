@@ -4,6 +4,10 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView 
 import { colors } from '../lib/styles';
 
 export default class LoginScreen extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  
   render() {
     return(
       <ScrollView style={styles.pageWrapper}>
