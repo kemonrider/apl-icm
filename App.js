@@ -19,7 +19,7 @@ import BillingDetailScreen from './src/screens/BillingDetail';
 import BillingHistoryScreen from './src/screens/BillingHistory';
 // report screens
 import ReportListScreen from './src/screens/ReportList';
-import ReportDetailScreel from './src/screens/ReportDetail';
+import ReportDetailScreen from './src/screens/ReportDetail';
 
 export default class App extends React.Component {  
   render() {
@@ -27,7 +27,7 @@ export default class App extends React.Component {
     // const Layout = NewsNavigation; // news navigation
     // return <Layout />;
 
-    return <ReportListScreen />;
+    return <ReportDetailScreen />;
   }
 }
 
