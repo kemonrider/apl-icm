@@ -4,19 +4,22 @@ import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 /**
  * Screens Component
  */
-// splash pages
+// splash screens
 import SplashScreen from './src/screens/Splash';
-// onboarding
+// onboarding screens
 import OnBoardingScreen from './src/screens/Onboarding';
-// news pages
+// news screens
 import NewsFeedScreen from './src/screens/NewsFeed';
 import NewsDetailScreen from './src/screens/NewsDetail';
-// auth pages
+// auth screens
 import LoginScreen from './src/screens/Login';
 import RegisterScreen from './src/screens/Register';
-// billing pages
+// billing screens
 import BillingDetailScreen from './src/screens/BillingDetail';
 import BillingHistoryScreen from './src/screens/BillingHistory';
+// report screens
+import ReportListScreen from './src/screens/ReportList';
+import ReportDetailScreel from './src/screens/ReportDetail';
 
 export default class App extends React.Component {  
   render() {
@@ -24,7 +27,7 @@ export default class App extends React.Component {
     // const Layout = NewsNavigation; // news navigation
     // return <Layout />;
 
-    return <BillingDetailScreen />;
+    return <ReportListScreen />;
   }
 }
 
