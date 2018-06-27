@@ -7,7 +7,7 @@ import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 // splash screens
 import SplashScreen from './src/screens/Splash';
 // onboarding screens
-import OnBoardingScreen from './src/screens/Onboarding';
+import OnboardingScreen from './src/screens/Onboarding';
 // news screens
 import NewsFeedScreen from './src/screens/NewsFeed';
 import NewsDetailScreen from './src/screens/NewsDetail';
@@ -27,7 +27,7 @@ export default class App extends React.Component {
     // const Layout = NewsNavigation; // news navigation
     // return <Layout />;
 
-    return <ReportDetailScreen />;
+    return <OnboardingScreen />;
   }
 }
 

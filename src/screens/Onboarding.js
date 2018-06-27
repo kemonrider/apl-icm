@@ -43,15 +43,9 @@ export default class OnboardingScreen extends React.Component {
           },
           {
             backgroundColor: colors.orange,
-            image: <Image source={require('../assets/images/onboarding/onboarding-3.png')} />,
-            title: 'Belanja Kebutuhan Harian',
-            subtitle: 'Praktis belanja makanan, minuman, kebutuhan dapur, dan kebutuhan harian lainnya'
-          },
-          {
-            backgroundColor: colors.orange,
-            image: <Image source={require('../assets/images/onboarding/onboarding-4.png')} />,
-            title: 'Booking Fasilitas Umum',
-            subtitle: 'Booking lapangan tenis, lapangan basket, dan balai warga makin mudah'
+            image: <Image source={require('../assets/images/onboarding/onboarding-3b.png')} />,
+            title: 'Dapatkan Bantuan',
+            subtitle: 'Mengalami kendala atau gangguan? Laporkan dan kami siap membantu!'
           }
         ]}
         skipLabel="Lewati"
