@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator, createSwitchNavigator, createDrawerNavigator } from 'react-navigation';
+import { TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -67,19 +68,20 @@ const NewsNavigation = createStackNavigator(
   {
     NewsFeed: {
       screen: NewsFeedScreen,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         headerTitle: 'Newsfeed',
         headerTitleStyle: navigationHeaderTitleStyle,
-        headerStyle: navigationHeaderStyle
-      }
+        headerStyle: navigationHeaderStyle,
+        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      })
     },
     NewsDetail: {
       screen: NewsDetailScreen,
       navigationOptions: {
         headerTitle: 'News Detail',
-        headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 5 }} />,
         headerTitleStyle: navigationHeaderTitleStyle,
-        headerStyle: navigationHeaderStyle
+        headerStyle: navigationHeaderStyle,
+        headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
       }
     },
   },
@@ -92,17 +94,18 @@ const BillingNavigation = createStackNavigator(
   {
     BillingHistory: {
       screen: BillingHistoryScreen,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         headerTitle: 'Riwayat',
         headerTitleStyle: navigationHeaderTitleStyle,
-        headerStyle: navigationHeaderStyle
-      }
+        headerStyle: navigationHeaderStyle,
+        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      })
     },
     BillingDetail: {
       screen: BillingDetailScreen,
       navigationOptions: {
         headerTitle: 'Detail Tagihan',
-        headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 5 }} />,
+        headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
         headerTitleStyle: navigationHeaderTitleStyle,
         headerStyle: navigationHeaderStyle
       }
@@ -117,16 +120,17 @@ const ReportNavigation = createStackNavigator(
   {
     ReportList: {
       screen: ReportListScreen,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         headerTitle: 'Layanan',
         headerTitleStyle: navigationHeaderTitleStyle,
-        headerStyle: navigationHeaderStyle
-      }
+        headerStyle: navigationHeaderStyle,
+        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      })
     },
     ReportDetailScreen: {
       screen: ReportDetailScreen,
       navigationOptions: {
-        headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 5 }} />,
+        headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
         headerTitleStyle: navigationHeaderTitleStyle,
         headerStyle: navigationHeaderStyle
       }
