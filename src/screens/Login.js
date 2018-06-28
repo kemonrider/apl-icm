@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView 
 
 import FormLabel from '../components/Form/Label';
 import { colors } from '../lib/styles';
+import { env } from '../lib/environment';
 
 export default class LoginScreen extends React.Component {
   constructor(props){
@@ -33,6 +34,22 @@ export default class LoginScreen extends React.Component {
     // - save token and auth on storage
     // - redirect to newsfeed
     // - if error, show error message
+
+    let userAuth = {
+      email: this.state.username,
+      password: this.state.password
+    }
+    
+    fetch(`${env.ENDPOINT}/api/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept-Encoding': 'application/json'
+      },
+      body: JSON.stringify(userAuth)
+    })
+      .then((response) => console.log(response))
+      .done()
   }
   
   render() {
@@ -47,17 +64,18 @@ export default class LoginScreen extends React.Component {
           <View style={styles.textInputWrapper}>
             <TextInput 
               style={styles.textInput} 
-              onChangeText={ 
-                (text) => {
-                  this.validateUsername(text);
-                } 
-              }
+              onChangeText={ (text) => this.validateUsername(text) }
               value={this.state.username}
             />
           </View>
           <FormLabel text="Password" />
           <View style={styles.textInputWrapper}>
-            <TextInput secureTextEntry={true} style={styles.textInput} />
+            <TextInput 
+              secureTextEntry={true} 
+              style={styles.textInput} 
+              onChangeText={ (text) => this.setState({password: text}) }
+              value={this.state.password}
+            />
           </View>
           <View>
             <Text style={styles.formErrorMessage}>{this.state.formErrorMessage}</Text>
@@ -65,8 +83,8 @@ export default class LoginScreen extends React.Component {
           <View style={styles.formButtonWrapper}>
             <TouchableOpacity 
               style={styles.formButton}
-              // onPress={() => this.props.navigation.navigate('Authorized')}
-              onPress={() => this.onFormSubmit()}
+              onPress={() => this.props.navigation.navigate('Authorized')}
+              // onPress={() => this.onFormSubmit()}
             >
               <Text style={{ color: colors.orange, fontWeight: 'bold' }}>MASUK</Text>
             </TouchableOpacity>

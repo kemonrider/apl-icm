@@ -31,10 +31,10 @@ import { navigationHeaderStyle, navigationHeaderTitleStyle } from './src/lib/sty
 
 export default class App extends React.Component {  
   render() {
-    // return <RootNavigation />;
+    return <RootNavigation />;
 
     // Development purpose only
-    return <LoginScreen />
+    // return <LoginScreen />
   }
 }
 
@@ -129,9 +129,10 @@ const ReportNavigation = createStackNavigator(
         headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
       })
     },
-    ReportDetailScreen: {
+    ReportDetail: {
       screen: ReportDetailScreen,
       navigationOptions: {
+        headerTitle: 'Aduan',
         headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
         headerTitleStyle: navigationHeaderTitleStyle,
         headerStyle: navigationHeaderStyle
