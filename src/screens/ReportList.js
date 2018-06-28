@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class ReportListScreen extends React.Component {
   constructor(props){
@@ -13,17 +13,21 @@ export default class ReportListScreen extends React.Component {
     let renderedCategories = [];
     for(let i = 0; i < this.state.categories.length; i++){
       renderedCategories.push(
-        <View 
+        <TouchableOpacity
           key={this.state.categories[i].id}
-          style={styles.categoryWrapper}
+          onPress={() => {this.props.navigation.navigate('ReportDetail'), { reportId: this.state.categories[i].id, reportTitle: this.state.categories[i].title }}}
         >
-          <View style={styles.categoryIconWrapper}>
-            <Image style={styles.categoryIcon} source={this.state.categories[i].icon} />
+          <View
+            style={styles.categoryWrapper}
+          >
+            <View style={styles.categoryIconWrapper}>
+              <Image style={styles.categoryIcon} source={this.state.categories[i].icon} />
+            </View>
+            <View style={styles.categoryTitleWrapper}>
+              <Text style={styles.categoryTitle}>{this.state.categories[i].title}</Text>
+            </View>
           </View>
-          <View style={styles.categoryTitleWrapper}>
-            <Text style={styles.categoryTitle}>{this.state.categories[i].title}</Text>
-          </View>
-        </View>
+        </TouchableOpacity>
       )
     }
     return renderedCategories;

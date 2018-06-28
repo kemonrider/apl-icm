@@ -23,7 +23,7 @@ export default class LoginScreen extends React.Component {
             <TextInput placeholder="password" />
           </View>
           <View style={styles.formButtonWrapper}>
-            <TouchableOpacity style={styles.formButton} onPress={() => this.props.navigation.navigate('NewsFeed')}>
+            <TouchableOpacity style={styles.formButton} onPress={() => this.props.navigation.navigate('Authorized')}>
               <Text style={{ color: colors.orange, fontWeight: 'bold' }}>MASUK</Text>
             </TouchableOpacity>
           </View>
@@ -33,7 +33,7 @@ export default class LoginScreen extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={styles.formNavigation}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {this.props.navigation.navigate('Register')}}>
               <Text style={styles.formNavigationText}>Belum punya Username?</Text>
             </TouchableOpacity>
           </View>

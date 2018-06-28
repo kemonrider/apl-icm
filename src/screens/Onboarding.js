@@ -21,7 +21,7 @@ export default class OnboardingScreen extends React.Component {
     // TODO:
     // Fix the redirect once the PR is done.
     setTimeout(() => {
-      this.props.navigation.navigate('LoginPage')
+      this.props.navigation.navigate('Login')
     }, 600)
   }
   

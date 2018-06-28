@@ -15,10 +15,14 @@ export default class BillingHistoryScreen extends React.Component {
     const renderedBillingHistory = [];
     for(let i = 0 ; i < this.state.billingHistory.length; i++){
       renderedBillingHistory.push(
-        <Billing
-          {...this.state.billingHistory[i]}
+        <TouchableOpacity
           key={this.state.billingHistory[i].id}
-        />
+          onPress={() => {this.props.navigation.navigate('BillingDetail', { billingId: this.state.billingHistory[i].id })}}
+        >
+          <Billing
+            {...this.state.billingHistory[i]}
+          />
+        </TouchableOpacity>
       )
     }
     return renderedBillingHistory;

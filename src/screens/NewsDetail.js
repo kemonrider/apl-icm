@@ -10,7 +10,7 @@ export default class NewsDetailScreen extends React.Component {
     return(
       <ScrollView style={styles.pageWrapper}>
         <View style={styles.pageHeader}>
-          <Image source={require('../assets/images/news/sample-news-image.jpg')} />
+          <Image style={{ width: '100%' }} source={require('../assets/images/news/sample-news-image.jpg')} />
         </View>
         <View style={styles.pageBody}>
           <View style={styles.newsDateWrapper}>

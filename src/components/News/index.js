@@ -16,10 +16,10 @@ export default class News extends React.Component {
             <Text style={styles.newsTitle}>{this.props.title}</Text>
           </View>
           <View style={styles.newsGradient}>
-            <Image source={require('../../assets/images/news/news-image-overlay.png')} />
+            <Image style={{ width: '100%' }} source={require('../../assets/images/news/news-image-overlay.png')} />
           </View>
           <View style={styles.newsImage}>
-            <Image source={require('../../assets/images/news/sample-news-image.jpg')} />
+            <Image style={{ width: '100%' }} source={require('../../assets/images/news/sample-news-image.jpg')} />
           </View>
         </View>
         <View style={styles.newsFooter}>
