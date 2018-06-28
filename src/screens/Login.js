@@ -1,11 +1,38 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 
+import FormLabel from '../components/Form/Label';
 import { colors } from '../lib/styles';
 
 export default class LoginScreen extends React.Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      username: '',
+      password: '',
+      formValid: false,
+      formErrorMessage: ''
+    }
+  }
+
+  validateUsername = (text) => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    this.setState({ username: text });
+    if(reg.test(text) === false) {
+      this.setState({ formValid: false });
+    } else {
+      this.setState({ formValid: true });
+    }
+  }
+
+  onFormSubmit = () => {
+    console.log(this.state);
+    // TODO:
+    // - Check if auth is valid
+    // - save token and auth on storage
+    // - redirect to newsfeed
+    // - if error, show error message
   }
   
   render() {
@@ -16,14 +43,31 @@ export default class LoginScreen extends React.Component {
           <Image source={require('../assets/images/innercity-management-logo.png')} />
         </View>
         <View style={styles.formMain}>
+          <FormLabel text="Username" />
           <View style={styles.textInputWrapper}>
-            <TextInput placeholder="email" />
+            <TextInput 
+              style={styles.textInput} 
+              onChangeText={ 
+                (text) => {
+                  this.validateUsername(text);
+                } 
+              }
+              value={this.state.username}
+            />
           </View>
+          <FormLabel text="Password" />
           <View style={styles.textInputWrapper}>
-            <TextInput placeholder="password" />
+            <TextInput secureTextEntry={true} style={styles.textInput} />
+          </View>
+          <View>
+            <Text style={styles.formErrorMessage}>{this.state.formErrorMessage}</Text>
           </View>
           <View style={styles.formButtonWrapper}>
-            <TouchableOpacity style={styles.formButton} onPress={() => this.props.navigation.navigate('Authorized')}>
+            <TouchableOpacity 
+              style={styles.formButton}
+              // onPress={() => this.props.navigation.navigate('Authorized')}
+              onPress={() => this.onFormSubmit()}
+            >
               <Text style={{ color: colors.orange, fontWeight: 'bold' }}>MASUK</Text>
             </TouchableOpacity>
           </View>
@@ -33,7 +77,9 @@ export default class LoginScreen extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={styles.formNavigation}>
-            <TouchableOpacity onPress={() => {this.props.navigation.navigate('Register')}}>
+            <TouchableOpacity 
+              onPress={() => {this.props.navigation.navigate('Register')}}
+            >
               <Text style={styles.formNavigationText}>Belum punya Username?</Text>
             </TouchableOpacity>
           </View>
@@ -61,9 +107,14 @@ const styles = StyleSheet.create({
   textInputWrapper: {
     marginBottom: 15
   },
+  textInput: {
+    color: "#FFFFFF",
+    borderColor: "#FFFFFF",
+    fontSize: 16
+  },
   formButtonWrapper: {},
   formButton: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#FFFFFF',
     width: '100%',
     padding: 15,
     alignItems: 'center',
@@ -75,6 +126,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   formNavigationText: {
-    color: '#ffffff'
+    color: '#FFFFFF'
+  },
+  formErrorMessage: {
+    color: 'red'
   }
 })
