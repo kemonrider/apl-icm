@@ -3,7 +3,7 @@ import { createStackNavigator, createSwitchNavigator, createDrawerNavigator } fr
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { appStorage } from './src/lib/storage';
+import { appStorage, storageConst } from './src/lib/storage';
 
 /**
  * Screens Component
@@ -30,8 +30,20 @@ import ReportDetailScreen from './src/screens/ReportDetail';
  */
 import { navigationHeaderStyle, navigationHeaderTitleStyle } from './src/lib/styles';
 
-export default class App extends React.Component {  
+export default class App extends React.Component {    
   render() {
+    // development only
+    appStorage.setItem(
+      storageConst.user,
+      {
+        name: "irwandi",
+        email: "irwandi@gmail.com",
+        phone: "0811232769",
+        unit: "W/19/WH",
+        token: "627b0be12af7ca0fb9cf7e78b31ba83ecbb3f608dfa19b660172be16cb50f4aa3fa0d5c19e67aa29a1843f63e124f15e8277e82a49b84b44e7154b0d883e5013"
+      }
+    )
+    
     return <RootNavigation />;
 
     // Development purpose only

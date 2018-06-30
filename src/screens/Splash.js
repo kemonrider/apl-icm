@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Alert } from 'react-native';
 
 import { colors } from '../lib/styles';
 import { appStorage, storageConst } from '../lib/storage';
@@ -10,12 +10,10 @@ export default class SplashScreen extends React.Component {
   }
   
   validateToken(){    
-    console.log('Getting user token');
     appStorage.getItem(storageConst.user, (error, user) => {
       user = JSON.parse(user);
-      console.log(user);
       if(error){
-        this.props.navigation.navigate('Onboarding');
+        Alert.alert('Failed to get user data', JSON.stringify(error));
       }
       if(user) {
         this.props.navigation.navigate('NewsFeed');
