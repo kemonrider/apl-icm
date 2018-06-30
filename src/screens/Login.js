@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native';
 
 import FormLabel from '../components/Form/Label';
+
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
 import { appStorage, storageConst } from '../lib/storage';
@@ -75,6 +76,7 @@ export default class LoginScreen extends React.Component {
   }
   
   handleLoginSuccess = async (data) => {
+    console.log('Login success');
     await appStorage.setItem(storageConst.user, data.data);
     this.props.navigation.navigate('NewsFeed');
   }
@@ -120,11 +122,11 @@ export default class LoginScreen extends React.Component {
               <Text style={{ color: colors.orange, fontWeight: 'bold' }}>MASUK</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.formNavigation}>
+          {/* <View style={styles.formNavigation}>
             <TouchableOpacity>
               <Text style={styles.formNavigationText}>Lupa Password?</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
           <View style={styles.formNavigation}>
             <TouchableOpacity 
               onPress={() => {this.props.navigation.navigate('Register')}}

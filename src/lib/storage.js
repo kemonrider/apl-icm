@@ -29,11 +29,11 @@ const setItem = async (itemKey, itemValue) => {
 //   } 
 // }
 
-const getItem = AsyncStorage.getItem;
-
 export const appStorage = {
   setItem: setItem,
-  getItem: getItem
+  getItem: AsyncStorage.getItem,
+  clearItem: AsyncStorage.clear,
+  removeItem: AsyncStorage.removeItem
 }
 
 export const storageConst = {

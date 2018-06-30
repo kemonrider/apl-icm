@@ -3,6 +3,8 @@ import { createStackNavigator, createSwitchNavigator, createDrawerNavigator } fr
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { appStorage } from './src/lib/storage';
+
 /**
  * Screens Component
  */
@@ -33,7 +35,7 @@ export default class App extends React.Component {
     return <RootNavigation />;
 
     // Development purpose only
-    // return <LoginScreen />
+    // return <RegisterScreen />
   }
 }
 

@@ -1,11 +1,95 @@
 import React from 'react';
-import { Text, View, ScrollView, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+
+import FormLabel from '../components/Form/Label';
 
 import { colors } from '../lib/styles';
+import { env } from '../lib/environment';
 
 export default class RegisterScreen extends React.Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      name: '',
+      email: '',
+      password: '',
+      phone: '',
+      unit: '',
+      formValid: false,
+      formError: false,
+      formErrorTitle: 'Gagal Registrasi',
+      formErrorMessage: '',
+      formSubmitting: false,
+      formSuccessTitle: 'Pendaftaran Berhasil',
+      formSuccessMessage: ''
+    }
+  }
+  
+  onFormSubmit = () => {
+    if(!this.state.formSubmitting){
+      this.setState({
+        formSubmitting: true
+      })
+    }
+
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      phone: this.state.phone,
+      unit: this.state.unit
+    }
+
+    console.log('Registering user');
+    console.log(newUser);
+
+    fetch(`${env.ENDPOINT}/api/auth/register`, {
+      method: 'POST',
+      headers: new Headers({
+        'Accept-Encoding': 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(newUser)
+    })
+      .then(response => {
+        this.setState({
+          formSubmitting: false
+        })
+        response.json().then(responseBody => {
+          if(response.status === 200){
+            this.handleRegisterSuccess(responseBody);
+          } else {
+            this.handleRegisterFail(responseBody);
+          }
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      })
+      .done()
+  }
+
+  handleRegisterSuccess = (data) => {
+    this.setState({
+      formSuccessMessage: data.message
+    })
+    Alert.alert(
+      this.state.formSuccessTitle,
+      this.state.formSuccessMessage,
+      [
+        {text: 'OK', onPress: () => this.props.navigation.navigate('Login')}
+      ],
+      { cancelable: false }
+    );
+  }
+
+  handleRegisterFail = (data) => {
+    this.setState({ 
+      formError: true,
+      formErrorMessage: data.message
+    })
+    Alert.alert(this.state.formErrorTitle, this.state.formErrorMessage);
   }
   
   render(){
@@ -15,20 +99,47 @@ export default class RegisterScreen extends React.Component {
           <Text style={styles.pageTitle}>Registrasi</Text>
         </View>
         <View style={styles.formWrapper}>
+          <FormLabel text="Nama" />
           <View style={styles.textInputWrapper}>
-            <TextInput placeholder="Email" />
+            <TextInput 
+              placeholder="Nama"
+              onChangeText={(name) => this.setState({name: name})}
+            />
+          </View>
+          <FormLabel text="Email" />
+          <View style={styles.textInputWrapper}>
+            <TextInput 
+              placeholder="Email"
+              onChangeText={(email) => this.setState({email: email})}
+            />
+          </View>
+          <FormLabel text="Nomor Ponsel" />
+          <View style={styles.textInputWrapper}>
+            <TextInput 
+              placeholder="Nomor Ponsel"
+              onChangeText={(phone) => this.setState({phone: phone})}
+            />
+          </View>
+          <FormLabel text="Unit Bangunan" />
+          <View style={styles.textInputWrapper}>
+            <TextInput 
+              placeholder="Unit Bangunan"
+              onChangeText={(unit) => this.setState({unit: unit})}
+            />
+          </View>
+          <FormLabel text="Password" />
+          <View style={styles.textInputWrapper}>
+            <TextInput 
+              placeholder="Password"
+              secureTextEntry={true} 
+              onChangeText={(password) => this.setState({password: password})}
+            />
           </View>
           <View style={styles.textInputWrapper}>
-            <TextInput placeholder="Nomor Ponsel" />
-          </View>
-          <View style={styles.textInputWrapper}>
-            <TextInput placeholder="Unit Bangunan" />
-          </View>
-          <View style={styles.textInputWrapper}>
-            <TextInput placeholder="Password" />
-          </View>
-          <View style={styles.textInputWrapper}>
-            <TouchableOpacity style={styles.formButton}>
+            <TouchableOpacity
+              style={styles.formButton}
+              onPress={() => this.onFormSubmit()}
+            >
               <Text style={{ color: colors.orange, fontWeight: 'bold' }}>DAFTAR</Text>
             </TouchableOpacity>
           </View>
