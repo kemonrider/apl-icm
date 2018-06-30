@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Image, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
@@ -10,7 +10,7 @@ export default class NewsDetailScreen extends React.Component {
     super(props);
 
     this.state = {
-      pageLoading: false,
+      pageLoading: true,
       newsDate: null,
       newsTitle: null,
       newsImage: null,
@@ -62,9 +62,20 @@ export default class NewsDetailScreen extends React.Component {
       })
   }
   
+  renderActivityIndicator(){
+    if(this.state.pageLoading){
+      return (
+        <View style={{ height: 200, alignItems: 'center', justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color={colors.purple} />
+        </View>
+      )
+    }
+  }
+  
   render() {
     return(
       <ScrollView style={styles.pageWrapper}>
+        { this.renderActivityIndicator() }
         <View style={styles.pageHeader}>
           <Image style={{ width: '100%' }} source={require('../assets/images/news/sample-news-image.jpg')} />
         </View>
