@@ -18,6 +18,7 @@ import NewsDetailScreen from './src/screens/NewsDetail';
 // auth screens
 import LoginScreen from './src/screens/Login';
 import RegisterScreen from './src/screens/Register';
+import LogoutScreen from './src/screens/Logout';
 // billing screens
 import BillingDetailScreen from './src/screens/BillingDetail';
 import BillingHistoryScreen from './src/screens/BillingHistory';
@@ -34,7 +35,7 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     
-    // this.injectUserToken();
+    this.injectUserToken();
   }
   
   // development only
@@ -54,9 +55,6 @@ export default class App extends React.Component {
   
   render() {    
     return <RootNavigation />;
-
-    // Development purpose only
-    // return <NewsFeedScreen />
   }
 }
 
@@ -171,7 +169,13 @@ const AuthorizedNavigation = createDrawerNavigator(
   {
     News: NewsNavigation,
     Billing: BillingNavigation,
-    Report: ReportNavigation
+    Report: ReportNavigation,
+    Logout: {
+      screen: LogoutScreen,
+      navigationOptions: {
+        header: null
+      }
+    }
   },
   {
     initialRouteName: 'News'

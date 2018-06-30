@@ -45,9 +45,6 @@ export default class LoginScreen extends React.Component {
         password: this.state.password
       }
       
-      console.log('Logging in with:');
-      console.log(userAuth);
-      
       fetch(`${env.ENDPOINT}/api/auth/login`, {
         method: 'POST',
         headers: new Headers({
@@ -69,14 +66,13 @@ export default class LoginScreen extends React.Component {
           })
         })
         .catch(error => {
-          console.log(error);
+          alert(error);
         })
         .done()
     }
   }
   
   handleLoginSuccess = async (data) => {
-    console.log('Login success');
     await appStorage.setItem(storageConst.user, data.data);
     this.props.navigation.navigate('NewsFeed');
   }
