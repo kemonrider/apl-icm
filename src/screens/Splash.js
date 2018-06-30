@@ -2,21 +2,27 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 
 import { colors } from '../lib/styles';
+import { appStorage, storageConst } from '../lib/storage';
 
 export default class SplashScreen extends React.Component {
   constructor(props){
     super(props);
   }
   
-  validateToken(){
-    setTimeout(() => {
-      this.props.navigation.navigate('Onboarding');
-    }, 500);
-    // TODO:
-    // - check storage for token
-    // - if token is exist, validate token to api
-    // - redirect to App if token is valid
-    // - redirect to Onboarding if token is not valid
+  validateToken(){    
+    console.log('Getting user token');
+    appStorage.getItem(storageConst.user, (error, user) => {
+      user = JSON.parse(user);
+      console.log(user);
+      if(error){
+        this.props.navigation.navigate('Onboarding');
+      }
+      if(user) {
+        this.props.navigation.navigate('NewsFeed');
+      } else {
+        this.props.navigation.navigate('Onboarding');
+      }
+    })
   }
   
   render(){

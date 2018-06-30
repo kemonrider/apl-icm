@@ -35,3 +35,7 @@ export const appStorage = {
   setItem: setItem,
   getItem: getItem
 }
+
+export const storageConst = {
+  user: 'user'
+}

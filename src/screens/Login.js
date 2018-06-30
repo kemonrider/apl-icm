@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView,
 import FormLabel from '../components/Form/Label';
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
-import { appStorage } from '../lib/storage';
+import { appStorage, storageConst } from '../lib/storage';
 
 export default class LoginScreen extends React.Component {
   constructor(props){
@@ -75,7 +75,7 @@ export default class LoginScreen extends React.Component {
   }
   
   handleLoginSuccess = async (data) => {
-    await appStorage.setItem('user', data.data);
+    await appStorage.setItem(storageConst.user, data.data);
     this.props.navigation.navigate('NewsFeed');
   }
 
