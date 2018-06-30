@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native';
 
 import FormLabel from '../components/Form/Label';
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
+import { appStorage } from '../lib/storage';
 
 export default class LoginScreen extends React.Component {
   constructor(props){
@@ -14,6 +15,7 @@ export default class LoginScreen extends React.Component {
       password: '',
       formValid: false,
       formError: false,
+      formErrorTitle: 'Gagal Login',
       formErrorMessage: '',
       formSubmitting: false
     }
@@ -37,10 +39,13 @@ export default class LoginScreen extends React.Component {
         formSubmitting: true
       });
 
-      let userAuth = {
+      const userAuth = {
         email: this.state.username,
         password: this.state.password
       }
+      
+      console.log('Logging in with:');
+      console.log(userAuth);
       
       fetch(`${env.ENDPOINT}/api/auth/login`, {
         method: 'POST',
@@ -54,34 +59,32 @@ export default class LoginScreen extends React.Component {
           this.setState({
             formSubmitting: false
           })
-          console.log(response)
           response.json().then(responseBody => {
             if(response.status === 200){
-              this.handleLoginSuccess(responseBody)
+              this.handleLoginSuccess(responseBody);
             } else {
-              this.handleLoginFailed(responseBody)
+              this.handleLoginFailed(responseBody);
             }
           })
         })
         .catch(error => {
-          console.log(error)
+          console.log(error);
         })
+        .done()
     }
   }
-
-  handleLoginSuccess(data){
-    // store user credential on storage
-    console.log(data);
-    
-    // redirect to Newsfeed Page
-    // this.props.navigation.navigate('NewsFeed')
+  
+  handleLoginSuccess = async (data) => {
+    await appStorage.setItem('user', data.data);
+    this.props.navigation.navigate('NewsFeed');
   }
 
-  handleLoginFailed(data){
+  handleLoginFailed = (data) => {
     this.setState({ 
       formError: true,
       formErrorMessage: data.message
     })
+    Alert.alert(this.state.formErrorTitle, this.state.formErrorMessage);
   }
 
   render() {
@@ -108,9 +111,6 @@ export default class LoginScreen extends React.Component {
               onChangeText={ (text) => this.setState({password: text}) }
               value={this.state.password}
             />
-          </View>
-          <View>
-            <Text style={styles.formErrorMessage}>{this.state.formErrorMessage}</Text>
           </View>
           <View style={styles.formButtonWrapper}>
             <TouchableOpacity 
@@ -177,8 +177,4 @@ const styles = StyleSheet.create({
   formNavigationText: {
     color: '#FFFFFF'
   },
-  formErrorMessage: {
-    color: 'red',
-    marginVertical: 10
-  }
 })

@@ -1,6 +1,5 @@
 import React from 'react';
 import { createStackNavigator, createSwitchNavigator, createDrawerNavigator } from 'react-navigation';
-import { TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -31,10 +30,10 @@ import { navigationHeaderStyle, navigationHeaderTitleStyle } from './src/lib/sty
 
 export default class App extends React.Component {  
   render() {
-    // return <RootNavigation />;
+    return <RootNavigation />;
 
     // Development purpose only
-    return <LoginScreen />
+    // return <LoginScreen />
   }
 }
 
