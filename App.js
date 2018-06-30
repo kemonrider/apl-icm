@@ -31,8 +31,15 @@ import ReportDetailScreen from './src/screens/ReportDetail';
 import { navigationHeaderStyle, navigationHeaderTitleStyle } from './src/lib/styles';
 
 export default class App extends React.Component {    
-  render() {
-    // development only
+  constructor(props){
+    super(props);
+    
+    this.injectUserToken();
+  }
+  
+  // development only
+  injectUserToken = async () => {
+    appStorage.clearItem()
     appStorage.setItem(
       storageConst.user,
       {
@@ -43,11 +50,13 @@ export default class App extends React.Component {
         token: "627b0be12af7ca0fb9cf7e78b31ba83ecbb3f608dfa19b660172be16cb50f4aa3fa0d5c19e67aa29a1843f63e124f15e8277e82a49b84b44e7154b0d883e5013"
       }
     )
-    
+  }
+  
+  render() {    
     return <RootNavigation />;
 
     // Development purpose only
-    // return <RegisterScreen />
+    // return <NewsFeedScreen />
   }
 }
 

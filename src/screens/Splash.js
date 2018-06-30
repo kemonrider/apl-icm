@@ -9,9 +9,16 @@ export default class SplashScreen extends React.Component {
     super(props);
   }
   
-  validateToken(){    
+  componentDidMount(){
+    this.validateToken();
+  }
+  
+  validateToken(){
+    console.log('[SplashScreen]: Validating Token');
     appStorage.getItem(storageConst.user, (error, user) => {
       user = JSON.parse(user);
+      console.log('Current User:');
+      console.log(user);
       if(error){
         Alert.alert('Failed to get user data', JSON.stringify(error));
       }
@@ -22,10 +29,8 @@ export default class SplashScreen extends React.Component {
       }
     })
   }
-  
+
   render(){
-    this.validateToken();
-    
     return(
       <View style={styles.pageWrapper}>
         <Image source={require('../assets/images/splash/innercity-splash.png')} />

@@ -13,7 +13,7 @@ export default class News extends React.Component {
       <View style={styles.newsWrapper}>
         <View style={styles.newsMain}>
           <View style={styles.newsTitleWrapper}>
-            <Text style={styles.newsTitle}>{this.props.title}</Text>
+            <Text style={styles.newsTitle}>{this.props.judul}</Text>
           </View>
           <View style={styles.newsGradient}>
             <Image style={{ width: '100%' }} source={require('../../assets/images/news/news-image-overlay.png')} />
