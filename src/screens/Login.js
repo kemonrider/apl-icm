@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView, AsyncStorage } from 'react-native';
 
 import FormLabel from '../components/Form/Label';
 import { colors } from '../lib/styles';
@@ -13,7 +13,9 @@ export default class LoginScreen extends React.Component {
       username: '',
       password: '',
       formValid: false,
-      formErrorMessage: ''
+      formError: false,
+      formErrorMessage: '',
+      formSubmitting: false
     }
   }
 
@@ -28,30 +30,60 @@ export default class LoginScreen extends React.Component {
   }
 
   onFormSubmit = () => {
-    console.log(this.state);
-    // TODO:
-    // - Check if auth is valid
-    // - save token and auth on storage
-    // - redirect to newsfeed
-    // - if error, show error message
+    if(!this.state.formSubmitting){
+      this.setState({
+        formError: false,
+        formErrorMessage: '',
+        formSubmitting: true
+      });
 
-    let userAuth = {
-      email: this.state.username,
-      password: this.state.password
+      let userAuth = {
+        email: this.state.username,
+        password: this.state.password
+      }
+      
+      fetch(`${env.ENDPOINT}/api/auth/login`, {
+        method: 'POST',
+        headers: new Headers({
+          'Accept-Encoding': 'application/json',
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(userAuth)
+      })
+        .then(response => {
+          this.setState({
+            formSubmitting: false
+          })
+          console.log(response)
+          response.json().then(responseBody => {
+            if(response.status === 200){
+              this.handleLoginSuccess(responseBody)
+            } else {
+              this.handleLoginFailed(responseBody)
+            }
+          })
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
-    
-    fetch(`${env.ENDPOINT}/api/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept-Encoding': 'application/json'
-      },
-      body: JSON.stringify(userAuth)
-    })
-      .then((response) => console.log(response))
-      .done()
   }
-  
+
+  handleLoginSuccess(data){
+    // store user credential on storage
+    console.log(data);
+    
+    // redirect to Newsfeed Page
+    // this.props.navigation.navigate('NewsFeed')
+  }
+
+  handleLoginFailed(data){
+    this.setState({ 
+      formError: true,
+      formErrorMessage: data.message
+    })
+  }
+
   render() {
     return(
       <ScrollView style={styles.pageWrapper}>
@@ -83,8 +115,7 @@ export default class LoginScreen extends React.Component {
           <View style={styles.formButtonWrapper}>
             <TouchableOpacity 
               style={styles.formButton}
-              onPress={() => this.props.navigation.navigate('Authorized')}
-              // onPress={() => this.onFormSubmit()}
+              onPress={() => this.onFormSubmit()}
             >
               <Text style={{ color: colors.orange, fontWeight: 'bold' }}>MASUK</Text>
             </TouchableOpacity>
@@ -147,6 +178,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF'
   },
   formErrorMessage: {
-    color: 'red'
+    color: 'red',
+    marginVertical: 10
   }
 })

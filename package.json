@@ -19,10 +19,12 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-native-onboarding-swiper": "^0.6.0",
     "react-native-vector-icons": "^4.6.0",
-    "react-navigation": "^2.5.1"
+    "react-navigation": "^2.5.1",
+    "request": "^2.87.0"
   }
 }

@@ -31,10 +31,10 @@ import { navigationHeaderStyle, navigationHeaderTitleStyle } from './src/lib/sty
 
 export default class App extends React.Component {  
   render() {
-    return <RootNavigation />;
+    // return <RootNavigation />;
 
     // Development purpose only
-    // return <LoginScreen />
+    return <LoginScreen />
   }
 }
 
