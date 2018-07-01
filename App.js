@@ -29,6 +29,8 @@ import ReportDetailScreen from './src/screens/ReportDetail';
 // promo screens
 import PromoListScreen from './src/screens/PromoList';
 import PromoDetailScreen from './src/screens/PromoDetail';
+// setting screen
+import SettingScreen from './src/screens/Setting';
 
 /**
  * Navigation Header Style
@@ -191,6 +193,20 @@ const PromoNavigation = createStackNavigator(
   }
 )
 
+const SettingNavigation = createStackNavigator(
+  {
+    SettingList: {
+      screen: SettingScreen,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: 'Pengaturan',
+        headerTitleStyle: navigationHeaderTitleStyle,
+        headerStyle: navigationHeaderStyle,
+        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      })
+    }
+  }
+)
+
 // drawer content
 const DrawerCustomComponent = (props) => {
   return (
@@ -229,9 +245,16 @@ const AuthorizedNavigation = createDrawerNavigator(
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-service.png')} />
       }
     },
+    Setting: {
+      screen: SettingNavigation,
+      navigationOptions: {
+        title: 'Pengaturan',
+        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-setting.png')} />
+      }
+    },
     Logout: {
       screen: LogoutScreen,
-      navigationOptions: {
+      navigationOptions: {        
         title: 'Keluar',
         header: null,
         drawerIcon: <Icon name="power-settings-new" size={20} color="#F19100" />
