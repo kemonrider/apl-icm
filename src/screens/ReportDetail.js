@@ -1,11 +1,13 @@
 import React from 'react';
-import { ActivityIndicator, Alert, Text, TextInput, View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Alert, Text, TextInput, View, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 import FormLabel from '../components/Form/Label';
 
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
 import { appStorage, storageConst } from '../lib/storage';
+
+var ImagePicker = require('react-native-image-picker');
 
 export default class ReportDetailScreen extends React.Component {
   constructor(props) {
@@ -20,6 +22,8 @@ export default class ReportDetailScreen extends React.Component {
     }
   }
 
+  formImages = [];
+  
   componentDidMount() {
     const { navigation } = this.props;
     this.setState({
@@ -28,16 +32,45 @@ export default class ReportDetailScreen extends React.Component {
     });
   }
 
-  submitForm = () => {
+  selectImage = () => {
+    var options = {
+      title: 'Pilih Gambar',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+      mediaType: 'photo'
+    };
+    
+    ImagePicker.launchImageLibrary(options, (response)  => {
+      console.log('Response = ', response);
 
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        this.formImages.push(response);
+        this.setState({
+          formImages: this.formImages
+        })
+        console.log(this.state);
+      }
+    });
+  }
+  
+  submitForm = () => {
   }
 
   submitImages = () => {
-
   }
 
   onSubmitDone = () => {
-
   }
   
   onFormSubmit = () => {
@@ -45,6 +78,24 @@ export default class ReportDetailScreen extends React.Component {
     this.setState({
       pageLoading: true
     })
+  }
+  
+  renderSelectedImage = () => {
+    if(this.state.formImages.length){
+      let renderedImages = [];
+      for(let i = 0; i < this.state.formImages.length; i++){
+        console.log(`data:image/jpeg;base64,${this.state.formImages[0].data}`);
+        renderedImages.push(
+          <Image
+            key={i}
+            // source={{ uri: `data:image/jpeg;base64,${this.state.formImages[i].data}`}}
+            source={{ uri: this.state.formImages[i].uri }}
+            style={styles.formImages}
+          />
+        )
+      }
+      return renderedImages
+    }
   }
   
   renderActivityIndicator(){
@@ -81,6 +132,23 @@ export default class ReportDetailScreen extends React.Component {
             </View>
             <View style={styles.formWrapper}>
               <FormLabel text="Foto" />
+              <View 
+                style={{
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  // alignItems: 'center',
+                  // alignContent: 'flex-start',
+                  // justifyContent: 'flex-start'
+                }}
+              >
+                {this.renderSelectedImage()}
+                <TouchableOpacity
+                  onPress={() => this.selectImage()}
+                  style={styles.formImages}
+                >
+                  <Image source={require('../assets/images/add-image.png')} />
+                </TouchableOpacity>
+              </View>
             </View>
           </ScrollView>
         </ScrollView>
@@ -111,42 +179,9 @@ const styles = StyleSheet.create({
   formWrapper: {},
   formLabel: {},
   formInput: {},
-  modalWrapper: {
-    elevation: 2,
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.8)'
-  },
-  modalDialog: {
-    backgroundColor: '#FFFFFF',
-    width: '100%',
-    maxWidth: '90%',
-    borderColor: '#E0E0E0',
-    borderWidth: 1,
-    padding: 20
-  },
-  modalHeader: {},
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    marginBottom: 15,
-  },
-  modalContent: {},
-  modalContentText: {
-    fontSize: 16,
-    lineHeight: 20
-  },
-  modalFooter: {
-    marginTop: 20,
-    alignItems: 'flex-end'
-  },
-  modalFooterText: {
-    color: colors.purple,
-    fontSize: 14,
-    fontWeight: '700'
+  formImages: {
+    flexGrow: 0,
+    width: '25%'
   },
   button: {
     backgroundColor: colors.purple,
