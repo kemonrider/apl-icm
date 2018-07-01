@@ -23,7 +23,7 @@ export default class BillingDetailScreen extends React.Component {
           <View style={styles.billingWrapper}>
             <View style={styles.billingHeader}>
               <View style={styles.billingIcon}>
-                <Image source={require('../assets/images/billing/electricity-icon.png')} />
+                <Image source={require('../assets/images/billing/electricity.png')} />
               </View>
               <View style={styles.billingInfo}>
                 <View style={styles.billingTitleWrapper}>

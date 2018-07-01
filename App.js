@@ -54,7 +54,7 @@ export default class App extends React.Component {
         email: "irwandi@gmail.com",
         phone: "0811232769",
         unit: "W/19/WH",
-        token: "ab66b58617001d353ccf5266e7ae62b7d1633a1e5b15c0ccd81f60a92418b642b878aaf14250dfd222db8ba743527d1446f88be9fe2cb78e9447833189ca8fc1"
+        token: "137037ac0bda84841d51a2c64cfde6d1a5a0399f25e3a9ccc4debd8705acdeba7bcd6d0a29e51eede406bac302ac77394826f907b6c4a3de6e1e177c1d97c735"
       }
     )
   }

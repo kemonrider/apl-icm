@@ -7,24 +7,51 @@ export default class Billing extends React.Component {
   constructor(props){
     super(props);
   }
+
+  getBillingIcon = (billingType) => {
+    billingType = billingType.toLowerCase();
+    switch(billingType) {
+      case 'maintenance':
+      return <Image source={require('../../assets/images/billing/maintenance.png')} />
+      break;
+      case 'power/water':
+        return <Image source={require('../../assets/images/billing/electricity.png')} />
+      break;
+      default:
+        return <Image source={require('../../assets/images/billing/billing-icon.png')} />
+      break;
+    }
+  }
+  
+  getBillingStatus = (billingStatus) => {
+    if(parseInt(billingStatus) === 1){
+      return <Text style={{color: '#F19100'}}>SUDAH DIBAYAR</Text>
+    } else {
+      return <Text style={{color: '#D51A1A'}}>BELUM DIBAYAR</Text>
+    }
+  }
+  
+  numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
   
   render(){    
     return(
       <View style={styles.billingWrapper}>
         <View style={styles.billingIcon}>
-          <Image source={require('../../assets/images/billing/billing-icon.png')} />
+          {this.getBillingIcon(this.props.type)}
         </View>
         <View style={styles.billingInfo}>
           <View style={styles.billingTitleWrapper}>
-            <Text style={styles.billingTitle}>{this.props.title}</Text>
+            <Text style={styles.billingTitle}>{this.props.unit} - {this.props.type}</Text>
           </View>
           <View style={styles.billingStatusWrapper}>
             <Text style={styles.billingStatus}>
-              <Text style={{color: this.props.statusColor}}>{this.props.status}</Text>
+              {this.getBillingStatus(this.props.is_paid)}
             </Text>
           </View>
           <View style={styles.billingDetailWrapper}>
-            <Text style={styles.billingDetail}>Rp {this.props.amount} - {this.props.date}</Text>
+            <Text style={styles.billingDetail}>Rp {this.numberWithCommas(this.props.bill_total)} - {this.props.bill_date}</Text>
           </View>
         </View>
         <View style={styles.billingArrow}>

@@ -11,7 +11,7 @@ export default class NewsFeedScreen extends React.Component {
     super(props);
 
     this.state = {
-      pageLoading: true,
+      pageLoading: false,
       newsList: []
     }
   }
@@ -21,32 +21,35 @@ export default class NewsFeedScreen extends React.Component {
   }
 
   getNewsFeed = async () => {
-    try {
-      this.setState({ pageLoading: true });
-      
-      let userToken = await appStorage.getItem(storageConst.user);
-      userToken = JSON.parse(userToken).token;
-      
-      fetch(`${env.ENDPOINT}/api/newsfeed`, {
-        method: 'GET',
-        headers: new Headers({
-          'Accept-Encoding': 'application/json',
-          'Content-Type': 'application/json',
-          'Token': userToken
-        })
-      })
-        .then(response => {
-          this.setState({ pageLoading: false });
-          response.json().then(responseBody => {
-            if(response.status === 200){
-              this.setState({ newsList: responseBody })
-            } else {
-              Alert.alert('Gagal Mengambil Berita', responseBody.message)
-            }
+    if(!this.state.pageLoading){
+      try {
+        this.setState({ pageLoading: true });
+        
+        let userToken = await appStorage.getItem(storageConst.user);
+        userToken = JSON.parse(userToken).token;
+        
+        fetch(`${env.ENDPOINT}/api/newsfeed`, {
+          method: 'GET',
+          headers: new Headers({
+            'Accept-Encoding': 'application/json',
+            'Content-Type': 'application/json',
+            'Token': userToken
           })
         })
-    } catch (error) {
-      Alert.alert('Gagal Mengambil Berita', JSON.stringify(error))
+          .then(response => {
+            this.setState({ pageLoading: false });
+            response.json().then(responseBody => {
+              if(response.status === 200){
+                this.setState({ newsList: responseBody })
+              } else {
+                Alert.alert('Gagal Mengambil Berita', responseBody.message)
+              }
+            })
+          })
+      } catch (error) {
+        console.log(error);
+        Alert.alert('Gagal Mengambil Berita', JSON.stringify(error))
+      }
     }
   }
   
