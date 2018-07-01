@@ -9,6 +9,15 @@ export default class BillingDetailScreen extends React.Component {
   constructor(props){
     super(props);
   }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    this.getBillingDetail(navigation.getParam('billingId'));
+  }
+
+  getBillingDetail = async (billingId) => {
+    console.log(billingId);
+  }
   
   render(){
     return(

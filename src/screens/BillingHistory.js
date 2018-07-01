@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
+import { ActivityIndicator, View, ScrollView, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 
 import Billing from '../components/Billing';
+
+import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
 import { appStorage, storageConst } from '../lib/storage';
 
@@ -37,7 +39,6 @@ export default class BillingHistoryScreen extends React.Component {
           .then(response => {
             this.setState({ pageLoading: false });
             response.json().then(responseBody => {
-              console.log(responseBody);
               if(response.status === 200){
                 this.setState({ billingHistory: responseBody.data })
               } else {
@@ -58,7 +59,7 @@ export default class BillingHistoryScreen extends React.Component {
       renderedBillingHistory.push(
         <TouchableOpacity
           key={this.state.billingHistory[i].id}
-          onPress={() => {this.props.navigation.navigate('BillingDetail', { billingId: this.state.billingHistory[i].id })}}
+          onPress={() => {this.props.navigation.navigate('BillingDetail', { billingId: this.state.billingHistory[i].id, billingType: this.state.billingHistory[i].type })}}
         >
           <Billing
             {...this.state.billingHistory[i]}
@@ -69,9 +70,20 @@ export default class BillingHistoryScreen extends React.Component {
     return renderedBillingHistory;
   }
   
+  renderActivityIndicator(){
+    if(this.state.pageLoading){
+      return (
+        <View style={{ height: 200, alignItems: 'center', justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color={colors.purple} />
+        </View>
+      )
+    }
+  }
+  
   render(){
     return(
       <ScrollView style={styles.pageWrapper}>
+        {this.renderActivityIndicator()}
         {this.renderBillingHistory()}
       </ScrollView>
     )

@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, ActivityIndicator, TouchableOpacity, View, Alert } from 'react-native';
 
 import News from '../components/News';
+
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
 import { appStorage, storageConst } from '../lib/storage';

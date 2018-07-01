@@ -20,7 +20,7 @@ export default class SplashScreen extends React.Component {
         Alert.alert('Failed to get user data', JSON.stringify(error));
       }
       if(user) {
-        this.props.navigation.navigate('NewsFeed');
+        this.props.navigation.navigate('Authorized');
       } else {
         this.props.navigation.navigate('Onboarding');
       }
