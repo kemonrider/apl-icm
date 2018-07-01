@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { createStackNavigator, createSwitchNavigator, createDrawerNavigator } from 'react-navigation';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -25,6 +26,9 @@ import BillingHistoryScreen from './src/screens/BillingHistory';
 // report screens
 import ReportListScreen from './src/screens/ReportList';
 import ReportDetailScreen from './src/screens/ReportDetail';
+// promo screens
+import PromoListScreen from './src/screens/PromoList';
+import PromoDetailScreen from './src/screens/PromoDetail';
 
 /**
  * Navigation Header Style
@@ -164,16 +168,58 @@ const ReportNavigation = createStackNavigator(
   }
 )
 
+const PromoNavigation = createStackNavigator(
+  {
+    PromoList: {
+      screen: PromoListScreen,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: 'Promo',
+        headerTitleStyle: navigationHeaderTitleStyle,
+        headerStyle: navigationHeaderStyle,
+        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      })
+    },
+    PromoDetail: {
+      screen: PromoDetailScreen,
+      navigationOptions: {
+        headerTitle: 'Detail Promo',
+        headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
+        headerTitleStyle: navigationHeaderTitleStyle,
+        headerStyle: navigationHeaderStyle
+      }
+    }
+  }
+)
+
 // Authorized Navigation
 const AuthorizedNavigation = createDrawerNavigator(
   {
-    News: NewsNavigation,
-    Billing: BillingNavigation,
-    Report: ReportNavigation,
+    News: {
+      screen: NewsNavigation,
+      navigationOptions: {
+        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-newsfeed.png')} />
+      }
+    },
+    Promo: {
+      screen: PromoNavigation,
+    },
+    Billing: {
+      screen: BillingNavigation,
+      navigationOptions: {
+        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-billing.png')} />
+      }
+    },
+    Report: {
+      screen: ReportNavigation,
+      navigationOptions: {
+        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-service.png')} />
+      }
+    },
     Logout: {
       screen: LogoutScreen,
       navigationOptions: {
-        header: null
+        header: null,
+        // drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-setting.png')} />
       }
     }
   },
