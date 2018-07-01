@@ -12,7 +12,7 @@ export default class Billing extends React.Component {
     billingType = billingType.toLowerCase();
     switch(billingType) {
       case 'maintenance':
-      return <Image source={require('../../assets/images/billing/maintenance.png')} />
+        return <Image source={require('../../assets/images/billing/maintenance.png')} />
       break;
       case 'power/water':
         return <Image source={require('../../assets/images/billing/electricity.png')} />

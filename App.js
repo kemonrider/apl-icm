@@ -263,7 +263,7 @@ const AuthorizedNavigation = createDrawerNavigator(
   },
   {
     // initialRouteName: 'News',
-    initialRouteName: 'Billing',
+    initialRouteName: 'Report',
     contentComponent: DrawerCustomComponent
   }
 )

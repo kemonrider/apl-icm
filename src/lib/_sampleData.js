@@ -61,3 +61,32 @@ export const billingHistory = [
     amount: '1400000'
   },
 ]
+
+// report category example
+export const categories = [
+  {
+    id: 1,
+    title: 'Aduan Kebersihan',
+    icon: require('../assets/images/report/report-cleaning.png')
+  },
+  {
+    id: 2,
+    title: 'Aduan Layanan Listrik',
+    icon: require('../assets/images/report/report-electricity.png')
+  },
+  {
+    id: 3,
+    title: 'Aduan Layanan Air',
+    icon: require('../assets/images/report/report-water.png')
+  },
+  {
+    id: 4,
+    title: 'Aduan Layanan Maintenance',
+    icon: require('../assets/images/report/report-maintenance.png')
+  },
+  {
+    id: 5,
+    title: 'Lain-lain',
+    icon: require('../assets/images/report/report-other.png')
+  }
+]

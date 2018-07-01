@@ -17,7 +17,7 @@ export default class BillingHistoryScreen extends React.Component {
   }
   
   componentDidMount(){
-    this.getBillingList()
+    this.getBillingList();
   }
   
   getBillingList = async () => {

@@ -38,7 +38,6 @@ export default class BillingDetailScreen extends React.Component {
 
     if(!this.state.pageLoading){
       try {
-        console.log('Getting billing detail');
         this.setState({
           pageLoading: true,
           billingDetail: null
@@ -62,7 +61,6 @@ export default class BillingDetailScreen extends React.Component {
                   billingDetail: responseBody.data[0],
                   pageLoading: false
                 })
-                console.log(this.state.billingDetail);
               } else {
                 console.log(responseBody.message);
                 Alert.alert('Gagal Mengambil Berita', responseBody.message)
