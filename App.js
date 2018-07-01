@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image } from 'react-native';
-import { createStackNavigator, createSwitchNavigator, createDrawerNavigator } from 'react-navigation';
+import { Image, Text, View, ScrollView } from 'react-native';
+import { createStackNavigator, createSwitchNavigator, createDrawerNavigator, DrawerItems } from 'react-navigation';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -52,7 +52,7 @@ export default class App extends React.Component {
         email: "irwandi@gmail.com",
         phone: "0811232769",
         unit: "W/19/WH",
-        token: "627b0be12af7ca0fb9cf7e78b31ba83ecbb3f608dfa19b660172be16cb50f4aa3fa0d5c19e67aa29a1843f63e124f15e8277e82a49b84b44e7154b0d883e5013"
+        token: "ab66b58617001d353ccf5266e7ae62b7d1633a1e5b15c0ccd81f60a92418b642b878aaf14250dfd222db8ba743527d1446f88be9fe2cb78e9447833189ca8fc1"
       }
     )
   }
@@ -191,6 +191,21 @@ const PromoNavigation = createStackNavigator(
   }
 )
 
+// drawer content
+const DrawerCustomComponent = (props) => {
+  console.log(props);
+  return (
+    <ScrollView>
+      <View style={{ width: '100%', height: 150, alignItems: 'center', justifyContent: 'center' }}>
+        <Image source={require('./src/assets/images/drawer-header.png')} />
+      </View>
+      <View>
+        <DrawerItems {...props} />
+      </View>
+    </ScrollView>
+  )
+}
+
 // Authorized Navigation
 const AuthorizedNavigation = createDrawerNavigator(
   {
@@ -199,9 +214,6 @@ const AuthorizedNavigation = createDrawerNavigator(
       navigationOptions: {
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-newsfeed.png')} />
       }
-    },
-    Promo: {
-      screen: PromoNavigation,
     },
     Billing: {
       screen: BillingNavigation,
@@ -224,7 +236,8 @@ const AuthorizedNavigation = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'News'
+    initialRouteName: 'News',
+    contentComponent: DrawerCustomComponent
   }
 )
 
