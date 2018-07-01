@@ -1,8 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, View, ScrollView, StyleSheet, Image, Text, Alert } from 'react-native';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
 import { appStorage, storageConst } from '../lib/storage';

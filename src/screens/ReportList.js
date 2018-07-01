@@ -78,7 +78,7 @@ export default class ReportListScreen extends React.Component {
         renderedCategories.push(
           <TouchableOpacity
             key={this.state.categories[i].id}
-            onPress={() => {this.props.navigation.navigate('ReportDetail'), { reportId: this.state.categories[i].id, reportTitle: this.state.categories[i].name }}}
+            onPress={() => {this.props.navigation.navigate('ReportDetail', { reportId: this.state.categories[i].id, reportTitle: this.state.categories[i].name })}}
           >
             <View
               style={styles.categoryWrapper}

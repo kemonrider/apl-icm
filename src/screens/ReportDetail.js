@@ -1,32 +1,57 @@
 import React from 'react';
-import { Text, TextInput, View, ScrollView, StyleSheet } from 'react-native';
+import { ActivityIndicator, Alert, Text, TextInput, View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+
+import FormLabel from '../components/Form/Label';
 
 import { colors } from '../lib/styles';
+import { env } from '../lib/environment';
+import { appStorage, storageConst } from '../lib/storage';
 
 export default class ReportDetailScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      modalShown: true
+      reportId: null,
+      repotTitle: null,
+      formTitle: '',
+      formContent: '',
+      formImages: []
     }
   }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    this.setState({
+      reportId: navigation.getParam('reportId'),
+      reportTitle: navigation.getParam('reportTitle')
+    });
+  }
+
+  submitForm = () => {
+
+  }
+
+  submitImages = () => {
+
+  }
+
+  onSubmitDone = () => {
+
+  }
   
-  renderModal(status) {
-    if(status){
+  onFormSubmit = () => {
+    console.log(this.state)
+    this.setState({
+      pageLoading: true
+    })
+  }
+  
+  renderActivityIndicator(){
+    if(this.state.pageLoading){
       return (
-        <View style={styles.modalWrapper}>
-          <View style={styles.modalDialog}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Aduan Terkirim</Text>
-            </View>
-            <View style={styles.modalContent}>
-              <Text style={styles.modalContentText}>Terimakasih telah mengirim aduan dengan nomor XXX-XXX. Tim kami akan segera menindaklanjutinya. Silakan cek status aduan Anda di menu Riwayat Aduan.</Text>
-            </View>
-            <View style={styles.modalFooter}>
-              <Text style={styles.modalFooterText}>TUTUP</Text>
-            </View>
-          </View>
+        <View style={{ height: '100%', width: '100%', zIndex: 2, backgroundColor: 'rgba(0,0,0,0.54)', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color={colors.purple} />
         </View>
       )
     }
@@ -35,22 +60,38 @@ export default class ReportDetailScreen extends React.Component {
   render(){
     return(
       <View style={styles.screenWrapper}>
-        <View style={styles.screenBody}>
+        {this.renderActivityIndicator()}
+        <ScrollView style={styles.screenBody}>
           <ScrollView>
             <View style={styles.formWrapper}>
-              <TextInput placeholder="Judul Aduan" />
+              <FormLabel text="Judul Aduan" />
+              <TextInput 
+                placeholder="Judul Aduan"
+                onChangeText={(text) => this.setState({formTitle: text})}
+              />
             </View>
             <View style={styles.formWrapper}>
-              <TextInput placeholder="Deskripsi" />
+              <FormLabel text="Deskripsi" />
+              <TextInput 
+                placeholder="Deskripsi"
+                maxLength={500}
+                multiline={true}
+                onChangeText={(text) => this.setState({formContent: text})}
+              />
+            </View>
+            <View style={styles.formWrapper}>
+              <FormLabel text="Foto" />
             </View>
           </ScrollView>
-        </View>
+        </ScrollView>
         <View style={styles.screenFooter}>
-          <View style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.onFormSubmit()}
+          >
             <Text style={styles.buttonText}>KIRIM ADUAN</Text>
-          </View>
+          </TouchableOpacity>
         </View>
-        {this.renderModal(true)}
       </View>
     )
   }
@@ -66,7 +107,6 @@ const styles = StyleSheet.create({
   screenFooter: {
     paddingHorizontal: 15,
     paddingVertical: 12,
-    backgroundColor: '#FFFFFF'
   },
   formWrapper: {},
   formLabel: {},
