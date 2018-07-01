@@ -57,12 +57,14 @@ export default class NewsDetailScreen extends React.Component {
                 newsImage: responseBody.data.image_url || null
               })
             } else {
+              console.log(responseBody.message);
               Alert.alert('Gagal Mengambil Berita', responseBody.message)
             }
           })
         })
     } catch(error){
-      alert(error);
+      console.log(error);
+      Alert.alert('Gagal Mengambil Berita', JSON.stringify(error));
     }
   }
   

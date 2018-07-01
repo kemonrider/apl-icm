@@ -18,7 +18,10 @@ export default class ReportDetailScreen extends React.Component {
       repotTitle: null,
       formTitle: '',
       formContent: '',
-      formImages: []
+      formImages: [],
+      formReportUploadMessage: null,
+      formReportId: null,
+      pageLoading: false,
     }
   }
 
@@ -43,8 +46,6 @@ export default class ReportDetailScreen extends React.Component {
     };
     
     ImagePicker.launchImageLibrary(options, (response)  => {
-      console.log('Response = ', response);
-
       if (response.didCancel) {
         console.log('User cancelled image picker');
       }
@@ -59,36 +60,115 @@ export default class ReportDetailScreen extends React.Component {
         this.setState({
           formImages: this.formImages
         })
-        console.log(this.state);
       }
     });
   }
   
-  submitForm = () => {
+  onFormSubmit = async () => {
+    if(!this.state.pageLoading){
+      try {
+        console.log('Submitting form');
+        this.setState({
+          pageLoading: true
+        });
+
+        const report = {
+          cat_id: this.state.reportId,
+          judul: this.state.formTitle,
+          aduan: this.state.formContent
+        }
+
+        let userToken = await appStorage.getItem(storageConst.user);
+        userToken = JSON.parse(userToken).token;
+
+        fetch(`${env.ENDPOINT}/api/ticket/create`, {
+          method: 'POST',
+          headers: new Headers({
+            'Accept-Encoding': 'application/json',
+            'Content-Type': 'application/json',
+            'Token': userToken
+          }),
+          body: JSON.stringify(report)
+        })
+          .then(response => {
+            response.json().then(responseBody => {
+              if(response.status === 200){
+                console.log('Success submitting report');
+                console.log(responseBody);
+                this.setState({
+                  formTitle: '',
+                  formContent: '',
+                  formReportUploadMessage: responseBody.message,
+                  formReportId: responseBody.data.id
+                });
+                this.submitImages(0);
+              } else {
+                console.log(responseBody.message);
+                Alert.alert('Gagal Mengirim Laporan', responseBody.message)
+              }
+            })
+          })
+      } catch (error) {
+        console.log(error);
+        Alert.alert('Gagal Mengirim Laporan', JSON.stringify(error));
+      }
+    }
   }
 
-  submitImages = () => {
+  submitImages = async (imageNumber) => {
+    try {
+      if(this.state.formImages.length && (imageNumber < this.state.formImages.length )){
+        console.log('Submitting image');
+
+        const attachImage = {
+          id: this.state.formReportId,
+          file: `data:image/jpeg;base64,${this.state.formImages[0].data}`
+        }
+        
+        let userToken = await appStorage.getItem(storageConst.user);
+        userToken = JSON.parse(userToken).token;
+        
+        fetch(`${env.ENDPOINT}/api/ticket/attach`, {
+          method: 'POST',
+          headers: new Headers({
+            'Accept-Encoding': 'application/json',
+            'Content-Type': 'application/json',
+            'Token': userToken
+          }),
+          body: JSON.stringify(attachImage)
+        })
+          .then(response => {
+            console.log('Success Submitting Image');
+            this.submitImages((imageNumber + 1));
+          })
+        
+      } else {
+        this.onSubmitDone();
+      }
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Gagal Mengirim Laporan', JSON.stringify(error));
+    }
   }
 
   onSubmitDone = () => {
-  }
-  
-  onFormSubmit = () => {
-    console.log(this.state)
-    this.setState({
-      pageLoading: true
-    })
+    console.log('Finished submitting form');
+    Alert.alert(
+      'Laporan Terkirim',
+      this.state.formReportUploadMessage,
+      [
+        { text: 'OK', onPress: () => this.props.navigation.navigate('ReportList') }
+      ]
+    );
   }
   
   renderSelectedImage = () => {
     if(this.state.formImages.length){
       let renderedImages = [];
       for(let i = 0; i < this.state.formImages.length; i++){
-        console.log(`data:image/jpeg;base64,${this.state.formImages[0].data}`);
         renderedImages.push(
           <Image
             key={i}
-            // source={{ uri: `data:image/jpeg;base64,${this.state.formImages[i].data}`}}
             source={{ uri: this.state.formImages[i].uri }}
             style={styles.formImages}
           />
@@ -135,10 +215,7 @@ export default class ReportDetailScreen extends React.Component {
               <View 
                 style={{
                   flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  // alignItems: 'center',
-                  // alignContent: 'flex-start',
-                  // justifyContent: 'flex-start'
+                  flexWrap: 'wrap'
                 }}
               >
                 {this.renderSelectedImage()}
