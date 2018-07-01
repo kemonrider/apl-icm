@@ -211,26 +211,30 @@ const AuthorizedNavigation = createDrawerNavigator(
     News: {
       screen: NewsNavigation,
       navigationOptions: {
+        title: 'Newsfeed',
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-newsfeed.png')} />
       }
     },
     Billing: {
       screen: BillingNavigation,
       navigationOptions: {
+        title: 'Riwayat',
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-billing.png')} />
       }
     },
     Report: {
       screen: ReportNavigation,
       navigationOptions: {
+        title: 'Layanan',
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-service.png')} />
       }
     },
     Logout: {
       screen: LogoutScreen,
       navigationOptions: {
+        title: 'Keluar',
         header: null,
-        // drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-setting.png')} />
+        drawerIcon: <Icon name="power-settings-new" size={20} color="#F19100" />
       }
     }
   },
