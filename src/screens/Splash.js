@@ -14,11 +14,8 @@ export default class SplashScreen extends React.Component {
   }
   
   validateToken(){
-    console.log('[SplashScreen]: Validating Token');
     appStorage.getItem(storageConst.user, (error, user) => {
       user = JSON.parse(user);
-      console.log('Current User:');
-      console.log(user);
       if(error){
         Alert.alert('Failed to get user data', JSON.stringify(error));
       }

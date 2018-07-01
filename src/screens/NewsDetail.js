@@ -54,7 +54,7 @@ export default class NewsDetailScreen extends React.Component {
                 newsDate: responseBody.data.tanggal || null,
                 newsTitle: responseBody.data.judul || null,
                 newsBody: responseBody.data.berita || null,
-                newsImage: responseBody.data.gambar || null
+                newsImage: responseBody.data.image_url || null
               })
             } else {
               Alert.alert('Gagal Mengambil Berita', responseBody.message)
@@ -81,7 +81,10 @@ export default class NewsDetailScreen extends React.Component {
       return (
         <View>
           <View style={styles.pageHeader}>
-            <Image style={{ width: '100%' }} source={require('../assets/images/news/sample-news-image.jpg')} />
+            <Image 
+              style={{ width: '100%', height: 200 }}
+              source={{ uri: this.state.newsImage}}
+            />
           </View>
           <View style={styles.pageBody}>
             <View style={styles.newsDateWrapper}>

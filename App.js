@@ -193,7 +193,6 @@ const PromoNavigation = createStackNavigator(
 
 // drawer content
 const DrawerCustomComponent = (props) => {
-  console.log(props);
   return (
     <ScrollView>
       <View style={{ width: '100%', height: 150, alignItems: 'center', justifyContent: 'center' }}>

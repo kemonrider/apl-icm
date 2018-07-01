@@ -6,8 +6,39 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 export default class News extends React.Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      width: '100%',
+      height: 200
+    }
   }
 
+  setImageHeight = () => {
+    Image.getSize(this.props.image_url, (width, height) => {
+      this.setState({ 
+        height: height 
+      })
+    })
+  }
+  
+  getNewsImage = () => {
+    if(this.props.image_url){
+      // this.setImageHeight();
+
+      return (
+        <Image
+          style={{
+            width: this.state.width, 
+            height: this.state.height
+          }}
+          source={{uri: this.props.image_url}}
+        />
+      )
+    } else {
+      return <Image style={{ width: '100%' }} source={require('../../assets/images/news/sample-news-image.jpg')} />
+    }
+  }
+  
   render(){
     return (
       <View style={styles.newsWrapper}>
@@ -19,7 +50,7 @@ export default class News extends React.Component {
             <Image style={{ width: '100%' }} source={require('../../assets/images/news/news-image-overlay.png')} />
           </View>
           <View style={styles.newsImage}>
-            <Image style={{ width: '100%' }} source={require('../../assets/images/news/sample-news-image.jpg')} />
+            {this.getNewsImage()}
           </View>
         </View>
         <View style={styles.newsFooter}>
