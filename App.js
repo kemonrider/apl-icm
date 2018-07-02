@@ -1,9 +1,10 @@
 import React from 'react';
 import { Image, Text, View, ScrollView } from 'react-native';
-import { createStackNavigator, createSwitchNavigator, createDrawerNavigator, DrawerItems } from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator, createTabNavigator, createDrawerNavigator, DrawerItems } from 'react-navigation';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { colors } from './src/lib/styles';
 import { appStorage, storageConst } from './src/lib/storage';
 
 /**
@@ -31,6 +32,8 @@ import PromoListScreen from './src/screens/PromoList';
 import PromoDetailScreen from './src/screens/PromoDetail';
 // setting screen
 import SettingScreen from './src/screens/Setting';
+// home screen
+import HomeScreen from './src/screens/Home';
 
 /**
  * Navigation Header Style
@@ -91,13 +94,28 @@ const NotAuthorizedNavigation = createStackNavigator(
   }
 )
 
+// Home Navigation
+const HomeNavigation = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: 'Beranda',
+        headerTitleStyle: navigationHeaderTitleStyle,
+        headerStyle: navigationHeaderStyle,
+        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      })
+    }
+  }
+)
+
 // News Navigation
 const NewsNavigation = createStackNavigator(
   {
     NewsFeed: {
       screen: NewsFeedScreen,
       navigationOptions: ({ navigation }) => ({
-        headerTitle: 'Newsfeed',
+        headerTitle: 'Berita',
         headerTitleStyle: navigationHeaderTitleStyle,
         headerStyle: navigationHeaderStyle,
         headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
@@ -106,7 +124,7 @@ const NewsNavigation = createStackNavigator(
     NewsDetail: {
       screen: NewsDetailScreen,
       navigationOptions: {
-        headerTitle: 'News Detail',
+        headerTitle: 'Detail Berita',
         headerTitleStyle: navigationHeaderTitleStyle,
         headerStyle: navigationHeaderStyle,
         headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
@@ -118,6 +136,7 @@ const NewsNavigation = createStackNavigator(
   }
 )
 
+// billing navigation
 const BillingNavigation = createStackNavigator(
   {
     BillingHistory: {
@@ -144,6 +163,7 @@ const BillingNavigation = createStackNavigator(
   }
 )
 
+// report navigation
 const ReportNavigation = createStackNavigator(
   {
     ReportList: {
@@ -170,6 +190,7 @@ const ReportNavigation = createStackNavigator(
   }
 )
 
+// promo navigation
 const PromoNavigation = createStackNavigator(
   {
     PromoList: {
@@ -193,6 +214,35 @@ const PromoNavigation = createStackNavigator(
   }
 )
 
+// feed navigation
+// const FeedNavigation = createTabNavigator(
+//   {
+//     FeedNews: {
+//       screen: NewsNavigation,
+//       navigationOptions: {
+//         title: 'BERITA',
+//       }
+//     },
+//     FeedPromo: {
+//       screen: PromoNavigation,
+//       navigationOptions: {
+//         title: 'PROMOSI',
+//       }
+//     }
+//   },
+//   {
+//     tabBarOptions: {
+//       indicatorStyle: {
+//         backgroundColor: colors.orange
+//       },
+//       style: {
+//         backgroundColor: colors.purple
+//       }
+//     }
+//   }
+// )
+
+// setting navigation
 const SettingNavigation = createStackNavigator(
   {
     SettingList: {
@@ -224,13 +274,27 @@ const DrawerCustomComponent = (props) => {
 // Authorized Navigation
 const AuthorizedNavigation = createDrawerNavigator(
   {
-    News: {
+    Home: {
       screen: NewsNavigation,
       navigationOptions: {
-        title: 'Newsfeed',
-        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-newsfeed.png')} />
+        title: 'Beranda',
+        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-home.png')} />
       }
     },
+    Promo: {
+      screen: PromoNavigation,
+      navigationOptions: {
+        title: 'Promosi',
+        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-home.png')} />
+      }
+    },
+    // News: {
+    //   screen: NewsNavigation,
+    //   navigationOptions: {
+    //     title: 'Newsfeed',
+    //     drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-newsfeed.png')} />
+    //   }
+    // },
     Billing: {
       screen: BillingNavigation,
       navigationOptions: {
@@ -254,7 +318,7 @@ const AuthorizedNavigation = createDrawerNavigator(
     },
     Logout: {
       screen: LogoutScreen,
-      navigationOptions: {        
+      navigationOptions: {
         title: 'Keluar',
         header: null,
         drawerIcon: <Icon name="power-settings-new" size={20} color="#F19100" />
@@ -262,8 +326,7 @@ const AuthorizedNavigation = createDrawerNavigator(
     }
   },
   {
-    // initialRouteName: 'News',
-    initialRouteName: 'Report',
+    initialRouteName: 'Home',
     contentComponent: DrawerCustomComponent
   }
 )
