@@ -48,18 +48,19 @@ export default class PromoListScreen extends React.Component {
   
   renderNewsFeed() {
     const renderedNewsList = [];
-    for(let i = 0; i < this.state.newsList.length; i++){
+    this.state.newsList.map(news => {
+      news.tag = 'Promosi';
       renderedNewsList.push(
         <TouchableOpacity 
-          key={this.state.newsList[i].id}
-          onPress={ () => this.props.navigation.navigate('PromoDetail', { promoId: this.state.newsList[i].id }) }
+          key={news.id}
+          onPress={ () => this.props.navigation.navigate('PromoDetail', { promoId: news.id }) }
         >
           <News
-            {...this.state.newsList[i]}
+            {...news}
           />
         </TouchableOpacity>
       )
-    }
+    })
     return renderedNewsList;
   }
 

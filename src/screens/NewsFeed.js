@@ -56,18 +56,19 @@ export default class NewsFeedScreen extends React.Component {
   
   renderNewsFeed() {
     const renderedNewsList = [];
-    for(let i = 0; i < this.state.newsList.length; i++){
+    this.state.newsList.map(news => {
+      news.tag = 'Berita';
       renderedNewsList.push(
         <TouchableOpacity 
-          key={this.state.newsList[i].id}
-          onPress={ () => this.props.navigation.navigate('NewsDetail', { newsId: this.state.newsList[i].id }) }
+          key={news.id}
+          onPress={ () => this.props.navigation.navigate('NewsDetail', { newsId: news.id }) }
         >
           <News
-            {...this.state.newsList[i]}
+            {...news}
           />
         </TouchableOpacity>
       )
-    }
+    })
     return renderedNewsList;
   }
 

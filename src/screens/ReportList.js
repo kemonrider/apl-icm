@@ -74,25 +74,25 @@ export default class ReportListScreen extends React.Component {
   renderCategories = () => {
     if(!this.state.pageLoading && this.state.categories){
       let renderedCategories = [];
-      for(let i = 0; i < this.state.categories.length; i++){
+      this.state.categories.map(category => {
         renderedCategories.push(
           <TouchableOpacity
-            key={this.state.categories[i].id}
-            onPress={() => {this.props.navigation.navigate('ReportDetail', { reportId: this.state.categories[i].id, reportTitle: this.state.categories[i].name })}}
+            key={category.id}
+            onPress={() => {this.props.navigation.navigate('ReportDetail', { reportId: category.id, reportTitle: category.name })}}
           >
             <View
               style={styles.categoryWrapper}
             >
               <View style={styles.categoryIconWrapper}>
-                {this.renderReportImage(this.state.categories[i].id)}
+                {this.renderReportImage(category.id)}
               </View>
               <View style={styles.categoryTitleWrapper}>
-                <Text style={styles.categoryTitle}>{this.state.categories[i].name}</Text>
+                <Text style={styles.categoryTitle}>{category.name}</Text>
               </View>
             </View>
           </TouchableOpacity>
         )
-      }
+      })
       return renderedCategories;
     } else {
       return false
