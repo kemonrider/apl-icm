@@ -54,6 +54,10 @@ export default class BillingDetailScreen extends React.Component {
         })
           .then(response => {
             response.json().then(responseBody => {
+              if(response.status === 401){
+                appStorage.clearItem();
+                this.props.navigation.navigate('NotAuthorized');
+              }
               if(response.status === 200){
                 this.setState({
                   billingDetail: responseBody.data[0],

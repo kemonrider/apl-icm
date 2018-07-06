@@ -49,6 +49,10 @@ export default class PromoDetailScreen extends React.Component {
           this.setState({ pageLoading: false });
           response.json().then(responseBody => {
             console.log(responseBody);
+            if(response.status === 401){
+              appStorage.clearItem();
+              this.props.navigation.navigate('NotAuthorized');
+            }
             if(response.status === 200){
               this.setState({
                 newsDate: responseBody.data.tanggal || null,

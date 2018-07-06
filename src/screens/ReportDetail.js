@@ -92,6 +92,10 @@ export default class ReportDetailScreen extends React.Component {
         })
           .then(response => {
             response.json().then(responseBody => {
+              if(response.status === 401){
+                appStorage.clearItem();
+                this.props.navigation.navigate('NotAuthorized');
+              }
               if(response.status === 200){
                 console.log('Success submitting report');
                 console.log(responseBody);

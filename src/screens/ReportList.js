@@ -37,6 +37,10 @@ export default class ReportListScreen extends React.Component {
           .then(response => {
             this.setState({ pageLoading: false });
             response.json().then(responseBody => {
+              if(response.status === 401){
+                appStorage.clearItem();
+                this.props.navigation.navigate('NotAuthorized');
+              }
               if(response.status === 200){
                 this.setState({ categories: responseBody.data })
               } else {
