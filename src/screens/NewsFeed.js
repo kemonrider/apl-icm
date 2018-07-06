@@ -29,7 +29,7 @@ export default class NewsFeedScreen extends React.Component {
         let userToken = await appStorage.getItem(storageConst.user);
         userToken = JSON.parse(userToken).token;
         
-        fetch(`${env.ENDPOINT}/api/newsfeed`, {
+        fetch(`${env.ENDPOINT}/api/newsfeed?type=2&limit=10`, {
           method: 'GET',
           headers: new Headers({
             'Accept-Encoding': 'application/json',
