@@ -57,7 +57,7 @@ export default class PromoListScreen extends React.Component {
       renderedNewsList.push(
         <TouchableOpacity 
           key={news.id}
-          onPress={ () => this.props.navigation.navigate('PromoDetail', { promoId: news.id }) }
+          onPress={ () => this.props.navigation.navigate('PromoDetail', { promoId: news.id, promoTitle: news.judul }) }
         >
           <News
             {...news}

@@ -57,7 +57,7 @@ export default class App extends React.Component {
         email: "irwandi@gmail.com",
         phone: "0811232769",
         unit: "W/19/WH",
-        token: "ae8a845126027e0250929c4591951356113e34e5f375b8d875c89866c928c9a99dd54a36c35e503cef106489b139fbcae4eaaea8c920a8e92e2f8314bb123ba7"
+        token: "d2a5f46aafd31fc37bc38d7278a43f241bd8d7129813b2d699749d467767ec4e4cac1d44a6c0ae99c132b23f47edb1840a0610c069df41bf0fac70f6b3c0d3e1"
       }
     )
   }
@@ -124,7 +124,6 @@ const NewsNavigation = createStackNavigator(
     NewsDetail: {
       screen: NewsDetailScreen,
       navigationOptions: {
-        headerTitle: 'Detail Berita',
         headerTitleStyle: navigationHeaderTitleStyle,
         headerStyle: navigationHeaderStyle,
         headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
@@ -178,7 +177,6 @@ const ReportNavigation = createStackNavigator(
     ReportDetail: {
       screen: ReportDetailScreen,
       navigationOptions: {
-        headerTitle: 'Aduan',
         headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
         headerTitleStyle: navigationHeaderTitleStyle,
         headerStyle: navigationHeaderStyle
@@ -205,7 +203,6 @@ const PromoNavigation = createStackNavigator(
     PromoDetail: {
       screen: PromoDetailScreen,
       navigationOptions: {
-        headerTitle: 'Detail Promo',
         headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
         headerTitleStyle: navigationHeaderTitleStyle,
         headerStyle: navigationHeaderStyle

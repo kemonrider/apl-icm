@@ -6,6 +6,12 @@ import { env } from '../lib/environment';
 import { appStorage, storageConst } from '../lib/storage';
 
 export default class PromoDetailScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('promoTitle'),
+    };
+  };
+  
   constructor(props){
     super(props);
 

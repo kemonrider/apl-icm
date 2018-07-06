@@ -65,7 +65,7 @@ export default class NewsFeedScreen extends React.Component {
       renderedNewsList.push(
         <TouchableOpacity 
           key={news.id}
-          onPress={ () => this.props.navigation.navigate('NewsDetail', { newsId: news.id }) }
+          onPress={ () => this.props.navigation.navigate('NewsDetail', { newsId: news.id, newsTitle: news.judul }) }
         >
           <News
             {...news}

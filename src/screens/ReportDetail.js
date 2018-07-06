@@ -10,6 +10,12 @@ import { appStorage, storageConst } from '../lib/storage';
 var ImagePicker = require('react-native-image-picker');
 
 export default class ReportDetailScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('reportTitle'),
+    };
+  };
+  
   constructor(props) {
     super(props);
 
