@@ -10,8 +10,19 @@ export default class LogoutScreen extends React.Component {
   
   componentDidMount = async () => {
     try {
-      await appStorage.clearItem();
-      this.props.navigation.navigate('Login');
+
+      fetch(`${env.ENDPOINT}/api/auth/logout`, {
+        method: 'POST',
+        headers: new Headers({
+          'Accept-Encoding': 'application/json',
+          'Content-Type': 'application/json',
+          'Token': userToken
+        })
+      }).then(response => {
+        appStorage.clearItem();
+        this.props.navigation.navigate('Login');
+      })
+      
     } catch(error) {
       alert(error)
     }
