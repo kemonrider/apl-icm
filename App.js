@@ -94,39 +94,30 @@ const NotAuthorizedNavigation = createStackNavigator(
   }
 )
 
-// Home Navigation
-const HomeNavigation = createStackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-      navigationOptions: ({ navigation }) => ({
-        headerTitle: 'Beranda',
-        headerTitleStyle: navigationHeaderTitleStyle,
-        headerStyle: navigationHeaderStyle,
-        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
-      })
-    }
-  }
-)
-
 // News Navigation
 const NewsNavigation = createStackNavigator(
   {
     NewsFeed: {
       screen: NewsFeedScreen,
-      navigationOptions: ({ navigation }) => ({
-        headerTitle: 'Berita',
-        headerTitleStyle: navigationHeaderTitleStyle,
-        headerStyle: navigationHeaderStyle,
-        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
-      })
+      // navigationOptions: ({ navigation }) => ({
+      //   headerTitle: 'Berita',
+      //   headerTitleStyle: navigationHeaderTitleStyle,
+      //   headerStyle: navigationHeaderStyle,
+      //   headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      // })
+      navigationOptions: {
+        header: null
+      }
     },
     NewsDetail: {
       screen: NewsDetailScreen,
+      // navigationOptions: {
+      //   headerTitleStyle: navigationHeaderTitleStyle,
+      //   headerStyle: navigationHeaderStyle,
+      //   headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
+      // }
       navigationOptions: {
-        headerTitleStyle: navigationHeaderTitleStyle,
-        headerStyle: navigationHeaderStyle,
-        headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
+        header: null
       }
     },
   },
@@ -193,51 +184,72 @@ const PromoNavigation = createStackNavigator(
   {
     PromoList: {
       screen: PromoListScreen,
-      navigationOptions: ({ navigation }) => ({
-        headerTitle: 'Promo',
-        headerTitleStyle: navigationHeaderTitleStyle,
-        headerStyle: navigationHeaderStyle,
-        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
-      })
+      // navigationOptions: ({ navigation }) => ({
+      //   headerTitle: 'Promo',
+      //   headerTitleStyle: navigationHeaderTitleStyle,
+      //   headerStyle: navigationHeaderStyle,
+      //   headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      // })
+      navigationOptions: {
+        header: null
+      }
     },
     PromoDetail: {
       screen: PromoDetailScreen,
+      // navigationOptions: {
+      //   headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
+      //   headerTitleStyle: navigationHeaderTitleStyle,
+      //   headerStyle: navigationHeaderStyle
+      // }
       navigationOptions: {
-        headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
-        headerTitleStyle: navigationHeaderTitleStyle,
-        headerStyle: navigationHeaderStyle
+        header: null
       }
     }
   }
 )
 
 // feed navigation
-// const FeedNavigation = createTabNavigator(
-//   {
-//     FeedNews: {
-//       screen: NewsNavigation,
-//       navigationOptions: {
-//         title: 'BERITA',
-//       }
-//     },
-//     FeedPromo: {
-//       screen: PromoNavigation,
-//       navigationOptions: {
-//         title: 'PROMOSI',
-//       }
-//     }
-//   },
-//   {
-//     tabBarOptions: {
-//       indicatorStyle: {
-//         backgroundColor: colors.orange
-//       },
-//       style: {
-//         backgroundColor: colors.purple
-//       }
-//     }
-//   }
-// )
+const FeedNavigation = createTabNavigator(
+  {
+    FeedNews: {
+      screen: NewsNavigation,
+      navigationOptions: {
+        title: 'BERITA',
+      }
+    },
+    FeedPromo: {
+      screen: PromoNavigation,
+      navigationOptions: {
+        title: 'PROMOSI',
+      }
+    }
+  },
+  {
+    tabBarOptions: {
+      indicatorStyle: {
+        backgroundColor: colors.orange
+      },
+      style: {
+        backgroundColor: colors.purple
+      }
+    }
+  }
+)
+
+// Home Navigation
+const HomeNavigation = createStackNavigator(
+  {
+    Home: {
+      screen: FeedNavigation,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: 'Beranda',
+        headerTitleStyle: navigationHeaderTitleStyle,
+        headerStyle: navigationHeaderStyle,
+        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      })
+    }
+  }
+)
 
 // setting navigation
 const SettingNavigation = createStackNavigator(
@@ -272,19 +284,19 @@ const DrawerCustomComponent = (props) => {
 const AuthorizedNavigation = createDrawerNavigator(
   {
     Home: {
-      screen: NewsNavigation,
+      screen: HomeNavigation,
       navigationOptions: {
         title: 'Beranda',
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-home.png')} />
       }
     },
-    Promo: {
-      screen: PromoNavigation,
-      navigationOptions: {
-        title: 'Promosi',
-        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-home.png')} />
-      }
-    },
+    // Promo: {
+    //   screen: PromoNavigation,
+    //   navigationOptions: {
+    //     title: 'Promosi',
+    //     drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-home.png')} />
+    //   }
+    // },
     // News: {
     //   screen: NewsNavigation,
     //   navigationOptions: {
