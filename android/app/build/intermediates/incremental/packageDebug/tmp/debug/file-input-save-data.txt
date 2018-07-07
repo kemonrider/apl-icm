@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Jun 29 05:34:32 ICT 2018
+#Sat Jul 07 20:24:56 ICT 2018
 5.base=C\:\\Users\\ricky\\Documents\\kerjaan\\APL\\innercity-management\\android\\app\\build\\intermediates\\assets\\debug
 22.path=fonts/Roboto.ttf
 32.set=NATIVE_RESOURCE

@@ -4,6 +4,7 @@ import { createStackNavigator, createSwitchNavigator, createTabNavigator, create
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { env } from './src/lib/environment';
 import { colors } from './src/lib/styles';
 import { appStorage, storageConst } from './src/lib/storage';
 
@@ -44,7 +45,9 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     
-    this.injectUserToken();
+    if(env.APP_ENV == 'development'){
+      this.injectUserToken();
+    }
   }
   
   // development only
@@ -57,12 +60,12 @@ export default class App extends React.Component {
         email: "irwandi@gmail.com",
         phone: "0811232769",
         unit: "W/19/WH",
-        token: "92f90051031a75fef4517eba47ae7092c670cd731e36249eda0b2b8ee3d9ca38e3b7bc4f71c7075cc2f0aabab27db1f285493ccce3fbdfb4676be45c0afcaf93"
+        token: "8fcbead0395cef660c1d25d0a4cdae367ca0c5209fb215c4119afa25944b9bb5174fd18b4618cccc7b3417cd96d7dd4626754dcd9f1c9393185efd1367796b73"
       }
     )
   }
   
-  render() {    
+  render() {
     return <RootNavigation />;
   }
 }
