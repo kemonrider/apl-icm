@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, Alert } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Alert, Image } from 'react-native';
 
 import FormLabel from '../components/Form/Label';
 
@@ -49,7 +49,9 @@ export default class SettingScreen extends React.Component {
     return (
       <ScrollView>
         <View style={styles.pageHeader}>
+          <Image style={styles.profilePicture} source={require('../assets/images/sample-profile.png')} />
           <Text style={{ fontSize: 18, fontWeight: '600', color: '#FFFFFF' }}>{ this.state.name }</Text>
+          <Text style={{ fontSize: 12, color: '#FFFFFF' }}>Pemilik Unit</Text>
         </View>
         <View style={styles.pageBody}>
           <View style={styles.formSet}>
@@ -73,10 +75,11 @@ export default class SettingScreen extends React.Component {
 const styles = StyleSheet.create({
   pageWrapper: {},
   pageHeader: {
-    height: 150,
+    height: 160,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.purple
+    backgroundColor: colors.purple,
+    paddingBottom: 10,
   },
   pageBody: {
     paddingHorizontal: 15,
@@ -87,5 +90,8 @@ const styles = StyleSheet.create({
   },
   formSet: {
     marginBottom: 20
+  },
+  profilePicture: {
+    marginBottom: 15
   }
 })
