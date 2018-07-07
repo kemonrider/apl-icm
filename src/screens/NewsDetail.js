@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, ScrollView, ActivityIndicator, WebView } from 'react-native';
+import { View, Image, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import HTMLView from 'react-native-htmlview';
 
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
@@ -106,10 +107,9 @@ export default class NewsDetailScreen extends React.Component {
               <Text style={styles.newsTitle}>{ this.state.newsTitle }</Text>
             </View>
             <View style={styles.newsBodyWrapper}>
-              <Text style={styles.newsBody}>
-                {/* { this.state.newsBody } */}
-                <WebView source={this.state.newsBody} />
-                </Text>
+              <HTMLView
+                value={this.state.newsBody}
+              />
             </View>
           </View>
         </View>

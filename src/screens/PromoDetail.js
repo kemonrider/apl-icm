@@ -101,9 +101,9 @@ export default class PromoDetailScreen extends React.Component {
               <Text style={styles.newsTitle}>{ this.state.newsTitle }</Text>
             </View>
             <View style={styles.newsBodyWrapper}>
-              <Text style={styles.newsBody}>
-                { this.state.newsBody }
-                </Text>
+              <HTMLView
+                value={this.state.newsBody}
+              />
             </View>
           </View>
         </View>
