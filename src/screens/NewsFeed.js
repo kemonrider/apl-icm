@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, ActivityIndicator, TouchableOpacity, View, Alert } from 'react-native';
+import { ScrollView, ActivityIndicator, View, Alert } from 'react-native';
 
 import News from '../components/News';
 
@@ -61,16 +61,13 @@ export default class NewsFeedScreen extends React.Component {
   renderNewsFeed() {
     const renderedNewsList = [];
     this.state.newsList.map(news => {
-      news.tag = 'Berita';
+      news.tag = news.type_name;
       renderedNewsList.push(
-        <TouchableOpacity 
+        <News 
+          {...news} 
           key={news.id}
-          onPress={ () => this.props.navigation.navigate('NewsDetail', { newsId: news.id, newsTitle: news.judul }) }
-        >
-          <News
-            {...news}
-          />
-        </TouchableOpacity>
+          onLink={ () => this.props.navigation.navigate('NewsDetail', { newsId: news.id, newsTitle: news.judul }) }
+        />
       )
     })
     return renderedNewsList;
