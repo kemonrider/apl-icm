@@ -64,6 +64,15 @@ export default class News extends React.Component {
     }
   }
 
+  onShare = () => {
+    const messageToShare = `${this.props.judul} \n ${this.props.ringkasan} \n ${this.props.link}`
+    Share.share({ 
+      message: messageToShare,
+      title: this.props.judul,
+      url: this.props.link 
+    })
+  }
+  
   render(){
     return (
       <View style={styles.newsWrapper}>
@@ -97,7 +106,7 @@ export default class News extends React.Component {
           </View>
           <View style={styles.newsShareWrapper}>
             <TouchableOpacity
-              onPress={() => Share.share({ message: this.props.ringkasan, title: this.props.judul, url: this.props.link })}
+              onPress={() => this.onShare()}
             >
               <Text style={styles.newsShare}><Icon name="share" size={iconStyle.size} /> Bagikan </Text>
             </TouchableOpacity>
