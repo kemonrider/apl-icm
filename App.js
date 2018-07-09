@@ -18,6 +18,8 @@ import OnboardingScreen from './src/screens/Onboarding';
 // news screens
 import NewsFeedScreen from './src/screens/NewsFeed';
 import NewsDetailScreen from './src/screens/NewsDetail';
+// favorite screens
+import FavoriteListScreen from './src/screens/FavoriteList';
 // auth screens
 import LoginScreen from './src/screens/Login';
 import RegisterScreen from './src/screens/Register';
@@ -60,7 +62,7 @@ export default class App extends React.Component {
         email: "irwandi@gmail.com",
         phone: "0811232769",
         unit: "W/19/WH",
-        token: "b28434173ade8b9154532592d9e3d1b9a2a4312bc1e4bc0f97a99e4898816a29319b7858a458006637e62587b7c54864d2a52d1430bde7c6782cc7bab37c0603"
+        token: "bd04dd038f429213321f9f66746df133650bb60aa386ce69448fd13334dd4dc71ceb848dba9010991611a9ee33c9c3fad7404048a50a2537c9f42395a78ceac9"
       }
     )
   }
@@ -94,38 +96,6 @@ const NotAuthorizedNavigation = createStackNavigator(
   },
   {
     initialRouteName: 'Onboarding'
-  }
-)
-
-// News Navigation
-const NewsNavigation = createStackNavigator(
-  {
-    NewsFeed: {
-      screen: NewsFeedScreen,
-      // navigationOptions: ({ navigation }) => ({
-      //   headerTitle: 'Berita',
-      //   headerTitleStyle: navigationHeaderTitleStyle,
-      //   headerStyle: navigationHeaderStyle,
-      //   headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
-      // })
-      navigationOptions: {
-        header: null
-      }
-    },
-    NewsDetail: {
-      screen: NewsDetailScreen,
-      // navigationOptions: {
-      //   headerTitleStyle: navigationHeaderTitleStyle,
-      //   headerStyle: navigationHeaderStyle,
-      //   headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
-      // }
-      navigationOptions: {
-        header: null
-      }
-    },
-  },
-  {
-    initialRouteName: 'NewsFeed'
   }
 )
 
@@ -182,48 +152,25 @@ const ReportNavigation = createStackNavigator(
   }
 )
 
-// promo navigation
-const PromoNavigation = createStackNavigator(
-  {
-    PromoList: {
-      screen: PromoListScreen,
-      // navigationOptions: ({ navigation }) => ({
-      //   headerTitle: 'Promo',
-      //   headerTitleStyle: navigationHeaderTitleStyle,
-      //   headerStyle: navigationHeaderStyle,
-      //   headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
-      // })
-      navigationOptions: {
-        header: null
-      }
-    },
-    PromoDetail: {
-      screen: PromoDetailScreen,
-      // navigationOptions: {
-      //   headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
-      //   headerTitleStyle: navigationHeaderTitleStyle,
-      //   headerStyle: navigationHeaderStyle
-      // }
-      navigationOptions: {
-        header: null
-      }
-    }
-  }
-)
-
 // feed navigation
 const FeedNavigation = createTabNavigator(
   {
     FeedNews: {
-      screen: NewsNavigation,
+      screen: NewsFeedScreen,
       navigationOptions: {
         title: 'BERITA',
       }
     },
     FeedPromo: {
-      screen: PromoNavigation,
+      screen: PromoListScreen,
       navigationOptions: {
         title: 'PROMOSI',
+      }
+    },
+    FeedFavorite: {
+      screen: FavoriteListScreen,
+      navigationOptions: {
+        title: 'FAVORIT'
       }
     }
   },
