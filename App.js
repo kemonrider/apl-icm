@@ -68,7 +68,8 @@ export default class App extends React.Component {
   }
   
   render() {
-    return <RootNavigation />;
+    // return <RootNavigation />;
+    return <MainNavigation />;
   }
 }
 
@@ -240,13 +241,6 @@ const AuthorizedNavigation = createDrawerNavigator(
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-home.png')} />
       }
     },
-    // Promo: {
-    //   screen: PromoNavigation,
-    //   navigationOptions: {
-    //     title: 'Promosi',
-    //     drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-home.png')} />
-    //   }
-    // },
     // News: {
     //   screen: NewsNavigation,
     //   navigationOptions: {
@@ -299,5 +293,22 @@ const RootNavigation = createSwitchNavigator(
   },
   {
     initialRouteName: 'Splash'
+  }
+)
+
+// main nav
+const MainNavigation = createStackNavigator(
+  {
+    Root: {
+      screen: RootNavigation,
+      navigationOptions: {
+        header: null
+      }
+    },
+    NewsDetailModal: NewsDetailScreen
+  },
+  {
+    mode: 'modal',
+    // headerMode: 'none'
   }
 )

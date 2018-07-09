@@ -66,7 +66,7 @@ export default class NewsFeedScreen extends React.Component {
         <News 
           {...news} 
           key={news.id}
-          onLink={ () => this.props.navigation.navigate('NewsDetail', { newsId: news.id, newsTitle: news.judul }) }
+          onLink={ () => this.props.navigation.navigate('NewsDetailModal', { newsId: news.id, newsTitle: news.judul }) }
         />
       )
     })

@@ -1,15 +1,21 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import HTMLView from 'react-native-htmlview';
 
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
 import { appStorage, storageConst } from '../lib/storage';
 
+import { navigationHeaderStyle, navigationHeaderTitleStyle } from '../lib/styles';
+
 export default class NewsDetailScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam('newsTitle'),
+      headerStyle: navigationHeaderStyle,
+      headerTitleStyle: navigationHeaderTitleStyle,
+      headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />, 
     };
   };
   
