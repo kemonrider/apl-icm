@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import { appStorage } from '../lib/storage';
+import { env } from '../lib/environment';
+import { appStorage, storageConst } from '../lib/storage';
 
 export default class LogoutScreen extends React.Component {  
   constructor(props){
@@ -11,6 +12,9 @@ export default class LogoutScreen extends React.Component {
   componentDidMount = async () => {
     try {
 
+      let userToken = await appStorage.getItem(storageConst.user);
+      userToken = JSON.parse(userToken).token;
+      
       fetch(`${env.ENDPOINT}/api/auth/logout`, {
         method: 'POST',
         headers: new Headers({
