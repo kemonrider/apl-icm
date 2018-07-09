@@ -48,10 +48,12 @@ export default class ReportDetailScreen extends React.Component {
         skipBackup: true,
         path: 'images',
       },
-      mediaType: 'photo'
+      mediaType: 'photo',
+      takePhotoButtonTitle: 'Ambil gambar...',
+      chooseFromLibraryButtonTitle: 'Pilih dari gallery...'
     };
     
-    ImagePicker.launchImageLibrary(options, (response)  => {
+    ImagePicker.showImagePicker(options, (response)  => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       }

@@ -62,13 +62,12 @@ export default class App extends React.Component {
         email: "irwandi@gmail.com",
         phone: "0811232769",
         unit: "W/19/WH",
-        token: "bd04dd038f429213321f9f66746df133650bb60aa386ce69448fd13334dd4dc71ceb848dba9010991611a9ee33c9c3fad7404048a50a2537c9f42395a78ceac9"
+        token: "605a4e857dfbf3ff21981cd1c2fed34c99fc15eaa39e3482837bc2b0d96820b6dd593fef968e3c629dfff78f85cf2b019997925c68522f27df7bd607fee15f7f"
       }
     )
   }
   
   render() {
-    // return <RootNavigation />;
     return <MainNavigation />;
   }
 }
