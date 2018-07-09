@@ -24,6 +24,7 @@ import FavoriteListScreen from './src/screens/FavoriteList';
 import LoginScreen from './src/screens/Login';
 import RegisterScreen from './src/screens/Register';
 import LogoutScreen from './src/screens/Logout';
+import ForgotPasswordScreen from './src/screens/ForgotPassword';
 // billing screens
 import BillingDetailScreen from './src/screens/BillingDetail';
 import BillingHistoryScreen from './src/screens/BillingHistory';
@@ -93,6 +94,12 @@ const NotAuthorizedNavigation = createStackNavigator(
         header: null
       }
     },
+    ForgotPassword: {
+      screen: ForgotPasswordScreen,
+      navigationOptions: {
+        header: null
+      }
+    }
   },
   {
     initialRouteName: 'Onboarding'

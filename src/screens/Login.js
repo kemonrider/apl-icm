@@ -33,6 +33,10 @@ export default class LoginScreen extends React.Component {
   }
 
   onFormSubmit = () => {
+    if(this.state.formSubmitting){
+      return false
+    }
+    
     if(!this.state.formSubmitting){
       this.setState({
         formError: false,
@@ -115,14 +119,16 @@ export default class LoginScreen extends React.Component {
               style={styles.formButton}
               onPress={() => this.onFormSubmit()}
             >
-              <Text style={{ color: colors.orange, fontWeight: 'bold' }}>MASUK</Text>
+              <Text style={{ color: colors.orange, fontWeight: 'bold' }}>{ this.state.formSubmitting ? 'MENGIRIM' : 'MASUK' }</Text>
             </TouchableOpacity>
           </View>
-          {/* <View style={styles.formNavigation}>
-            <TouchableOpacity>
+          <View style={styles.formNavigation}>
+            <TouchableOpacity
+              onPress={() => {this.props.navigation.navigate('ForgotPassword')}}
+            >
               <Text style={styles.formNavigationText}>Lupa Password?</Text>
             </TouchableOpacity>
-          </View> */}
+          </View>
           <View style={styles.formNavigation}>
             <TouchableOpacity 
               onPress={() => {this.props.navigation.navigate('Register')}}

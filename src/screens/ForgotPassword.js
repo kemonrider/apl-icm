@@ -1,56 +1,52 @@
 import React from 'react';
-import { Text, View, ScrollView, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { Text, View, ScrollView, TextInput, StyleSheet, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 
 import FormLabel from '../components/Form/Label';
 
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
 
-export default class RegisterScreen extends React.Component {
+export default class ForgotPasswordScreen extends React.Component {
   constructor(props){
     super(props);
 
     this.state = {
-      name: '',
       email: '',
-      password: '',
-      phone: '',
-      unit: '',
       formValid: false,
       formError: false,
-      formErrorTitle: 'Gagal Registrasi',
+      formErrorTitle: 'Gagal Reset Password',
       formErrorMessage: '',
       formSubmitting: false,
-      formSuccessTitle: 'Pendaftaran Berhasil',
+      formSuccessTitle: 'Reset Password Berhasil',
       formSuccessMessage: ''
     }
   }
   
   onFormSubmit = () => {
+    if(this.state.formSubmitting){
+      return false
+    }
+    
     if(!this.state.formSubmitting){
       this.setState({
         formSubmitting: true
       })
     }
 
-    const newUser = {
-      name: this.state.name,
+    const forgottenUser = {
       email: this.state.email,
-      password: this.state.password,
-      phone: this.state.phone,
-      unit: this.state.unit
     }
 
-    console.log('Registering user');
-    console.log(newUser);
+    console.log('Resetting user password');
+    console.log(forgottenUser);
 
-    fetch(`${env.ENDPOINT}/api/auth/register`, {
+    fetch(`${env.ENDPOINT}/api/auth/forgot`, {
       method: 'POST',
       headers: new Headers({
         'Accept-Encoding': 'application/json',
         'Content-Type': 'application/json',
       }),
-      body: JSON.stringify(newUser)
+      body: JSON.stringify(forgottenUser)
     })
       .then(response => {
         this.setState({
@@ -96,16 +92,9 @@ export default class RegisterScreen extends React.Component {
     return(
       <ScrollView style={styles.pageWrapper}>
         <View style={styles.pageTitleWrapper}>
-          <Text style={styles.pageTitle}>Registrasi</Text>
+          <Text style={styles.pageTitle}>Lupa Password</Text>
         </View>
         <View style={styles.formWrapper}>
-          <FormLabel text="Nama" />
-          <View style={styles.textInputWrapper}>
-            <TextInput 
-              placeholder="Nama"
-              onChangeText={(name) => this.setState({name: name})}
-            />
-          </View>
           <FormLabel text="Email" />
           <View style={styles.textInputWrapper}>
             <TextInput 
@@ -113,34 +102,12 @@ export default class RegisterScreen extends React.Component {
               onChangeText={(email) => this.setState({email: email})}
             />
           </View>
-          <FormLabel text="Nomor Ponsel" />
-          <View style={styles.textInputWrapper}>
-            <TextInput 
-              placeholder="Nomor Ponsel"
-              onChangeText={(phone) => this.setState({phone: phone})}
-            />
-          </View>
-          <FormLabel text="Unit Bangunan" />
-          <View style={styles.textInputWrapper}>
-            <TextInput 
-              placeholder="Unit Bangunan"
-              onChangeText={(unit) => this.setState({unit: unit})}
-            />
-          </View>
-          <FormLabel text="Password" />
-          <View style={styles.textInputWrapper}>
-            <TextInput 
-              placeholder="Password"
-              secureTextEntry={true} 
-              onChangeText={(password) => this.setState({password: password})}
-            />
-          </View>
           <View style={styles.textInputWrapper}>
             <TouchableOpacity
               style={styles.formButton}
               onPress={() => this.onFormSubmit()}
             >
-              <Text style={{ color: colors.orange, fontWeight: 'bold' }}>{ this.state.formSubmitting ? 'MENGIRIM' : 'DAFTAR' }</Text>
+              <Text style={{ color: colors.orange, fontWeight: 'bold' }}>{ this.state.formSubmitting ? 'MENGIRIM' : 'RESET PASSWORD' }</Text>
             </TouchableOpacity>
           </View>
         </View>
