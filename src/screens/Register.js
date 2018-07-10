@@ -102,35 +102,40 @@ export default class RegisterScreen extends React.Component {
           <FormLabel text="Nama" />
           <View style={styles.textInputWrapper}>
             <TextInput 
-              placeholder="Nama"
+              // placeholder="Nama"
+              style={styles.textInput}
               onChangeText={(name) => this.setState({name: name})}
             />
           </View>
           <FormLabel text="Email" />
           <View style={styles.textInputWrapper}>
             <TextInput 
-              placeholder="Email"
+              // placeholder="Email"
+              style={styles.textInput}
               onChangeText={(email) => this.setState({email: email})}
             />
           </View>
           <FormLabel text="Nomor Ponsel" />
           <View style={styles.textInputWrapper}>
             <TextInput 
-              placeholder="Nomor Ponsel"
+              // placeholder="Nomor Ponsel"
+              style={styles.textInput}
               onChangeText={(phone) => this.setState({phone: phone})}
             />
           </View>
           <FormLabel text="Unit Bangunan" />
           <View style={styles.textInputWrapper}>
             <TextInput 
-              placeholder="Unit Bangunan"
+              // placeholder="Unit Bangunan"
+              style={styles.textInput}
               onChangeText={(unit) => this.setState({unit: unit})}
             />
           </View>
           <FormLabel text="Password" />
           <View style={styles.textInputWrapper}>
             <TextInput 
-              placeholder="Password"
+              // placeholder="Password"
+              style={styles.textInput}
               secureTextEntry={true} 
               onChangeText={(password) => this.setState({password: password})}
             />
@@ -140,7 +145,7 @@ export default class RegisterScreen extends React.Component {
               style={styles.formButton}
               onPress={() => this.onFormSubmit()}
             >
-              <Text style={{ color: colors.orange, fontWeight: 'bold' }}>{ this.state.formSubmitting ? 'MENGIRIM' : 'DAFTAR' }</Text>
+              <Text style={{ color: colors.primary, fontWeight: 'bold' }}>{ this.state.formSubmitting ? 'MENGIRIM' : 'DAFTAR' }</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -151,7 +156,7 @@ export default class RegisterScreen extends React.Component {
 
 const styles = StyleSheet.create({
   pageWrapper: {
-    backgroundColor: colors.orange,
+    backgroundColor: colors.primary,
   },
   pageTitleWrapper: {
     height: 100,
@@ -168,6 +173,11 @@ const styles = StyleSheet.create({
   },
   textInputWrapper: {
     marginBottom: 25
+  },
+  textInput: {
+    color: "#FFFFFF",
+    borderColor: "#FFFFFF",
+    fontSize: 16
   },
   formButtonWrapper: {},
   formButton: {

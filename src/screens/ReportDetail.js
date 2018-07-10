@@ -194,7 +194,7 @@ export default class ReportDetailScreen extends React.Component {
     if(this.state.pageLoading){
       return (
         <View style={{ height: '100%', width: '100%', zIndex: 2, backgroundColor: 'rgba(0,0,0,0.54)', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
-          <ActivityIndicator size="large" color={colors.purple} />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       )
     }
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     width: '25%'
   },
   button: {
-    backgroundColor: colors.purple,
+    backgroundColor: colors.primary,
     paddingVertical: 15,
     alignItems: 'center',
     justifyContent: 'center'

@@ -107,7 +107,7 @@ export default class ReportListScreen extends React.Component {
     if(this.state.pageLoading){
       return (
         <View style={{ height: 200, alignItems: 'center', justifyContent: 'center' }}>
-          <ActivityIndicator size="large" color={colors.purple} />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       )
     }

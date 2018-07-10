@@ -48,9 +48,9 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     
-    // if(env.APP_ENV == 'development'){
-    //   this.injectUserToken();
-    // }
+    if(env.APP_ENV == 'development'){
+      this.injectUserToken();
+    }
   }
   
   // development only
@@ -63,7 +63,7 @@ export default class App extends React.Component {
         email: "irwandi@gmail.com",
         phone: "0811232769",
         unit: "W/19/WH",
-        token: "605a4e857dfbf3ff21981cd1c2fed34c99fc15eaa39e3482837bc2b0d96820b6dd593fef968e3c629dfff78f85cf2b019997925c68522f27df7bd607fee15f7f"
+        token: "498056111f2978f3b3cd271a84cba48f64e2adb3fbaace43cb07f20c830e0dfc9ffd8e901fabeecac447f2ffbdc9e8f929be1f03ae9f6f8d45b8f66d8b9fca7d"
       }
     )
   }
@@ -184,10 +184,10 @@ const FeedNavigation = createTabNavigator(
   {
     tabBarOptions: {
       indicatorStyle: {
-        backgroundColor: colors.orange
+        backgroundColor: colors.secondary
       },
       style: {
-        backgroundColor: colors.purple
+        backgroundColor: colors.primary
       }
     }
   }
@@ -280,7 +280,7 @@ const AuthorizedNavigation = createDrawerNavigator(
       navigationOptions: {
         title: 'Keluar',
         header: null,
-        drawerIcon: <Icon name="power-settings-new" size={20} color="#F19100" />
+        drawerIcon: <Icon name="power-settings-new" size={20} color="#023B2D" />
       }
     }
   },

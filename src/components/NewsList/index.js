@@ -87,7 +87,7 @@ export default class NewsList extends React.Component {
     if(state){
       return (
         <View style={{ height: 200, alignItems: 'center', justifyContent: 'center' }}>
-          <ActivityIndicator size="large" color={colors.purple} />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       )
     }

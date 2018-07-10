@@ -98,7 +98,8 @@ export default class ForgotPasswordScreen extends React.Component {
           <FormLabel text="Email" />
           <View style={styles.textInputWrapper}>
             <TextInput 
-              placeholder="Email"
+              // placeholder="Email"
+              style={styles.textInput}
               onChangeText={(email) => this.setState({email: email})}
             />
           </View>
@@ -107,7 +108,7 @@ export default class ForgotPasswordScreen extends React.Component {
               style={styles.formButton}
               onPress={() => this.onFormSubmit()}
             >
-              <Text style={{ color: colors.orange, fontWeight: 'bold' }}>{ this.state.formSubmitting ? 'MENGIRIM' : 'RESET PASSWORD' }</Text>
+              <Text style={{ color: colors.primary, fontWeight: 'bold' }}>{ this.state.formSubmitting ? 'MENGIRIM' : 'RESET PASSWORD' }</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -118,7 +119,7 @@ export default class ForgotPasswordScreen extends React.Component {
 
 const styles = StyleSheet.create({
   pageWrapper: {
-    backgroundColor: colors.orange,
+    backgroundColor: colors.primary,
   },
   pageTitleWrapper: {
     height: 100,
@@ -136,9 +137,14 @@ const styles = StyleSheet.create({
   textInputWrapper: {
     marginBottom: 25
   },
+  textInput: {
+    color: "#FFFFFF",
+    borderColor: "#FFFFFF",
+    fontSize: 16
+  },
   formButtonWrapper: {},
   formButton: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#FFFFFF',
     width: '100%',
     padding: 15,
     alignItems: 'center',

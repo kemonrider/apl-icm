@@ -3,6 +3,8 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { colors } from '../../lib/styles';
+
 export default class Billing extends React.Component {
   constructor(props){
     super(props);
@@ -25,7 +27,7 @@ export default class Billing extends React.Component {
   
   getBillingStatus = (billingStatus) => {
     if(parseInt(billingStatus) === 1){
-      return <Text style={{color: '#F19100'}}>SUDAH DIBAYAR</Text>
+      return <Text style={{color: colors.primary}}>SUDAH DIBAYAR</Text>
     } else {
       return <Text style={{color: '#D51A1A'}}>BELUM DIBAYAR</Text>
     }

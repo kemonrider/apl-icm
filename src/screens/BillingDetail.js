@@ -209,7 +209,7 @@ export default class BillingDetailScreen extends React.Component {
         <ScrollView style={styles.pageWrapper}>
           <View style={styles.pageHeader}>
             <Text style={{ color: '#FFFFFF', fontSize: 10 }}>Jumlah Tagihan</Text>
-            <Text style={{ color: colors.orange, fontSize: 28, fontWeight: '600', marginBottom: 5, marginTop: 5 }}>Rp {this.numberWithCommas(this.state.billingDetail.total)}</Text>
+            <Text style={{ color: '#FFFFFF', fontSize: 28, fontWeight: '600', marginBottom: 5, marginTop: 5 }}>Rp {this.numberWithCommas(this.state.billingDetail.total)}</Text>
             <Text style={{ color: '#FFFFFF', fontSize: 10 }}>{this.state.billingDetail.bill_date}</Text>
           </View>
           <View style={styles.pageBody}>
@@ -249,7 +249,7 @@ export default class BillingDetailScreen extends React.Component {
                             parseInt(this.state.billingDetail.power_water_bill_paid) > 0 ||
                             parseInt(this.state.billingDetail.maintenance_bill_paid) > 0
                           ){
-                            return <Text style={{color: '#F19100'}}>SUDAH DIBAYAR</Text>
+                            return <Text style={{color: colors.primary}}>SUDAH DIBAYAR</Text>
                           } else {
                             return <Text style={{color: '#D51A1A'}}>BELUM DIBAYAR</Text>
                           }
@@ -278,7 +278,7 @@ export default class BillingDetailScreen extends React.Component {
     if(this.state.pageLoading && !this.state.billingDetail){
       return (
         <View style={{ height: 200, alignItems: 'center', justifyContent: 'center' }}>
-          <ActivityIndicator size="large" color={colors.purple} />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       )
     } else {
@@ -290,7 +290,7 @@ export default class BillingDetailScreen extends React.Component {
 const styles = StyleSheet.create({
   pageWrapper: {},
   pageHeader: {
-    backgroundColor: colors.purple,
+    backgroundColor: colors.primary,
     padding: 30,
     alignItems: 'center'
   },
@@ -386,7 +386,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   tableFooterText: {
-    color: colors.orange,
+    color: colors.primary,
     fontWeight: '600',
     fontSize: 10
   },

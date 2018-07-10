@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   pageWrapper: {
     flex: 1,
     height: '100%',
-    backgroundColor: colors.purple,
+    backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center'
   }

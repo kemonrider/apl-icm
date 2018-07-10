@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     height: 160,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.purple,
+    backgroundColor: colors.primary,
     paddingBottom: 10,
   },
   pageBody: {
