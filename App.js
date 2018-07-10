@@ -33,7 +33,6 @@ import ReportListScreen from './src/screens/ReportList';
 import ReportDetailScreen from './src/screens/ReportDetail';
 // promo screens
 import PromoListScreen from './src/screens/PromoList';
-import PromoDetailScreen from './src/screens/PromoDetail';
 // setting screen
 import SettingScreen from './src/screens/Setting';
 // home screen

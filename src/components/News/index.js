@@ -101,7 +101,7 @@ export default class News extends React.Component {
             <TouchableOpacity
               onPress={() => this.onFav()}
             >
-              <Text style={styles.newsLike}> <Icon name="favorite" color={ (this.state.is_fav == 1) ? colors.primary : null } size={iconStyle.size} /> Suka </Text>
+              <Text style={styles.newsLike}> <Icon name="favorite" color={ (this.state.is_fav == 1) ? colors.secondary : null } size={iconStyle.size} /> Suka </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.newsShareWrapper}>
