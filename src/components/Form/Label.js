@@ -9,7 +9,11 @@ export default class FormLabel extends React.Component {
   render(){
     return(
       <View style={styles.labelWrapper}>
-        <Text style={styles.labelText}>{this.props.text}</Text>
+        <Text 
+          style={this.props.textColor ? {color: this.props.textCOlor} : styles.labelText}
+        >
+          {this.props.text}
+        </Text>
       </View>
     )
   }

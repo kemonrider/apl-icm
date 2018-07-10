@@ -249,7 +249,7 @@ export default class BillingDetailScreen extends React.Component {
                             parseInt(this.state.billingDetail.power_water_bill_paid) > 0 ||
                             parseInt(this.state.billingDetail.maintenance_bill_paid) > 0
                           ){
-                            return <Text style={{color: colors.primary}}>SUDAH DIBAYAR</Text>
+                            return <Text style={{color: colors.secondary}}>SUDAH DIBAYAR</Text>
                           } else {
                             return <Text style={{color: '#D51A1A'}}>BELUM DIBAYAR</Text>
                           }
@@ -391,18 +391,3 @@ const styles = StyleSheet.create({
     fontSize: 10
   },
 })
-
-// Sample data for billing
-// const billing = [
-//   {
-//     id: 1,
-//     type: 'electricity',
-//     title: 'Tagihan Listrik dan Air',
-//     status: 'BELUM DIBAYAR',
-//     statusColor: 'D51A1A',
-//     amount: '300000',
-//     invoiceNumber: 'QWERTYUIOP12345',
-//     invoiceDate: '30 June 2018',
-//    .. TODO : Continue add sample data
-//   }
-// ]

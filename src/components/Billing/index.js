@@ -27,7 +27,7 @@ export default class Billing extends React.Component {
   
   getBillingStatus = (billingStatus) => {
     if(parseInt(billingStatus) === 1){
-      return <Text style={{color: colors.primary}}>SUDAH DIBAYAR</Text>
+      return <Text style={{color: colors.secondary}}>SUDAH DIBAYAR</Text>
     } else {
       return <Text style={{color: '#D51A1A'}}>BELUM DIBAYAR</Text>
     }

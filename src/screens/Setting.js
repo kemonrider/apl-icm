@@ -47,7 +47,7 @@ export default class SettingScreen extends React.Component {
   
   render(){
     return (
-      <ScrollView>
+      <ScrollView style={styles.pageWrap}>
         <View style={styles.pageHeader}>
           <Image style={styles.profilePicture} source={require('../assets/images/sample-profile.png')} />
           <Text style={{ fontSize: 18, fontWeight: '600', color: '#FFFFFF' }}>{ this.state.name }</Text>
@@ -55,15 +55,15 @@ export default class SettingScreen extends React.Component {
         </View>
         <View style={styles.pageBody}>
           <View style={styles.formSet}>
-            <FormLabel text="Unit Bangunan" />
+            <FormLabel textColor="#999999" text="Unit Bangunan" />
             <Text style={styles.pageBodyText}>{ this.state.unit }</Text>
           </View>
           <View style={styles.formSet}>
-            <FormLabel text="Nomor HP" />
+            <FormLabel textColor="#999999" text="Nomor HP" />
             <Text style={styles.pageBodyText}>{ this.state.phone }</Text>
           </View>
           <View style={styles.formSet}>
-            <FormLabel text="Email" />
+            <FormLabel textColor="#999999" text="Email" />
             <Text style={styles.pageBodyText}>{ this.state.email }</Text>
           </View>
         </View>

@@ -207,14 +207,14 @@ export default class ReportDetailScreen extends React.Component {
         <ScrollView style={styles.screenBody}>
           <ScrollView>
             <View style={styles.formWrapper}>
-              <FormLabel text="Judul Aduan" />
+              <FormLabel textColor="#999999" text="Judul Aduan" />
               <TextInput 
                 placeholder="Judul Aduan"
                 onChangeText={(text) => this.setState({formTitle: text})}
               />
             </View>
             <View style={styles.formWrapper}>
-              <FormLabel text="Deskripsi" />
+              <FormLabel textColor="#999999" text="Deskripsi" />
               <TextInput 
                 placeholder="Deskripsi"
                 maxLength={500}
@@ -223,7 +223,7 @@ export default class ReportDetailScreen extends React.Component {
               />
             </View>
             <View style={styles.formWrapper}>
-              <FormLabel text="Foto" />
+              <FormLabel textColor="#999999" text="Foto" />
               <View 
                 style={{
                   flexDirection: 'row',
