@@ -310,7 +310,7 @@ const MainNavigation = createStackNavigator(
         header: null
       }
     },
-    NewsDetailModal: NewsDetailScreen
+    MODAL_NewsDetail: NewsDetailScreen
   },
   {
     mode: 'modal',
