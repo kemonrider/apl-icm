@@ -48,9 +48,9 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     
-    if(env.APP_ENV == 'development'){
-      this.injectUserToken();
-    }
+    // if(env.APP_ENV == 'development'){
+    //   this.injectUserToken();
+    // }
   }
   
   // development only

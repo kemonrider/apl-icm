@@ -16,6 +16,7 @@ export default class RegisterScreen extends React.Component {
       password: '',
       phone: '',
       unit: '',
+      site: 'Mediterania Garden Residence',
       formValid: false,
       formError: false,
       formErrorTitle: 'Gagal Registrasi',
@@ -105,6 +106,7 @@ export default class RegisterScreen extends React.Component {
               // placeholder="Nama"
               style={styles.textInput}
               onChangeText={(name) => this.setState({name: name})}
+              value={this.state.name}
             />
           </View>
           <FormLabel text="Email" />
@@ -113,6 +115,7 @@ export default class RegisterScreen extends React.Component {
               // placeholder="Email"
               style={styles.textInput}
               onChangeText={(email) => this.setState({email: email})}
+              value={this.state.email}
             />
           </View>
           <FormLabel text="Nomor Ponsel" />
@@ -121,6 +124,16 @@ export default class RegisterScreen extends React.Component {
               // placeholder="Nomor Ponsel"
               style={styles.textInput}
               onChangeText={(phone) => this.setState({phone: phone})}
+              value={this.state.phone}
+            />
+          </View>
+          <FormLabel text="Site" />
+          <View style={styles.textInputWrapper}>
+            <TextInput 
+              // placeholder="Unit Bangunan"
+              style={styles.textInput}
+              value={this.state.site}
+              editable={false}
             />
           </View>
           <FormLabel text="Unit Bangunan" />
@@ -129,6 +142,7 @@ export default class RegisterScreen extends React.Component {
               // placeholder="Unit Bangunan"
               style={styles.textInput}
               onChangeText={(unit) => this.setState({unit: unit})}
+              value={this.state.unit}
             />
           </View>
           <FormLabel text="Password" />
@@ -138,6 +152,7 @@ export default class RegisterScreen extends React.Component {
               style={styles.textInput}
               secureTextEntry={true} 
               onChangeText={(password) => this.setState({password: password})}
+              value={this.state.password}
             />
           </View>
           <View style={styles.textInputWrapper}>
@@ -176,7 +191,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     color: "#FFFFFF",
-    borderColor: "#FFFFFF",
+    borderBottomColor: "#FFFFFF",
     fontSize: 16
   },
   formButtonWrapper: {},
