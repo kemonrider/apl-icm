@@ -38,7 +38,7 @@ import PromoListScreen from './src/screens/PromoList';
 // setting screen
 import SettingScreen from './src/screens/Setting';
 // home screen
-import HomeScreen from './src/screens/Home';
+import DashboardScreen from './src/screens/Dashboard';
 
 /**
  * Navigation Header Style
@@ -49,9 +49,9 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     
-    if(env.APP_ENV == 'development'){
-      this.injectUserToken();
-    }
+    // if(env.APP_ENV == 'development'){
+    //   this.injectUserToken();
+    // }
   }
   
   // development only
@@ -235,6 +235,21 @@ const HomeNavigation = createStackNavigator(
   }
 )
 
+// Dashboard Navigation
+const DashboardNavigation = createStackNavigator(
+  {
+    Dashboard: {
+      screen: DashboardScreen,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: 'Beranda',
+        headerTitleStyle: navigationHeaderTitleStyle,
+        headerStyle: navigationHeaderStyle,
+        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      })
+    }
+  }
+)
+
 // setting navigation
 const SettingNavigation = createStackNavigator(
   {
@@ -267,6 +282,13 @@ const DrawerCustomComponent = (props) => {
 // Authorized Navigation
 const AuthorizedNavigation = createDrawerNavigator(
   {
+    Dashboard: {
+      screen: DashboardNavigation,
+      navigationOptions: {
+        title: 'Beranda',
+        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-home.png')} />
+      }
+    },
     Home: {
       screen: HomeNavigation,
       navigationOptions: {
@@ -274,13 +296,6 @@ const AuthorizedNavigation = createDrawerNavigator(
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-newsfeed.png')} />
       }
     },
-    // News: {
-    //   screen: NewsNavigation,
-    //   navigationOptions: {
-    //     title: 'Newsfeed',
-    //     drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-newsfeed.png')} />
-    //   }
-    // },
     Billing: {
       screen: BillingNavigation,
       navigationOptions: {
@@ -319,7 +334,7 @@ const AuthorizedNavigation = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Dashboard',
     contentComponent: DrawerCustomComponent
   }
 )
