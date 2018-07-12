@@ -29,8 +29,9 @@ import ForgotPasswordScreen from './src/screens/ForgotPassword';
 import BillingDetailScreen from './src/screens/BillingDetail';
 import BillingHistoryScreen from './src/screens/BillingHistory';
 // report screens
+import ReportCategoryScreen from './src/screens/ReportCategory';
+import ReportCreateScreen from './src/screens/ReportCreate';
 import ReportListScreen from './src/screens/ReportList';
-import ReportDetailScreen from './src/screens/ReportDetail';
 // promo screens
 import PromoListScreen from './src/screens/PromoList';
 // setting screen
@@ -135,8 +136,8 @@ const BillingNavigation = createStackNavigator(
 // report navigation
 const ReportNavigation = createStackNavigator(
   {
-    ReportList: {
-      screen: ReportListScreen,
+    ReportCategory: {
+      screen: ReportCategoryScreen,
       navigationOptions: ({ navigation }) => ({
         headerTitle: 'Layanan',
         headerTitleStyle: navigationHeaderTitleStyle,
@@ -144,8 +145,8 @@ const ReportNavigation = createStackNavigator(
         headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
       })
     },
-    ReportDetail: {
-      screen: ReportDetailScreen,
+    ReportCreate: {
+      screen: ReportCreateScreen,
       navigationOptions: {
         headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
         headerTitleStyle: navigationHeaderTitleStyle,
@@ -154,7 +155,7 @@ const ReportNavigation = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'ReportList'
+    initialRouteName: 'ReportCategory'
   }
 )
 
@@ -198,7 +199,7 @@ const HomeNavigation = createStackNavigator(
     Home: {
       screen: FeedNavigation,
       navigationOptions: ({ navigation }) => ({
-        headerTitle: 'Beranda',
+        headerTitle: 'Newsfeed',
         headerTitleStyle: navigationHeaderTitleStyle,
         headerStyle: navigationHeaderStyle,
         headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
@@ -242,8 +243,8 @@ const AuthorizedNavigation = createDrawerNavigator(
     Home: {
       screen: HomeNavigation,
       navigationOptions: {
-        title: 'Beranda',
-        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-home.png')} />
+        title: 'Newsfeed',
+        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-newsfeed.png')} />
       }
     },
     // News: {
