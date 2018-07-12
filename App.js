@@ -32,6 +32,7 @@ import BillingHistoryScreen from './src/screens/BillingHistory';
 import ReportCategoryScreen from './src/screens/ReportCategory';
 import ReportCreateScreen from './src/screens/ReportCreate';
 import ReportListScreen from './src/screens/ReportList';
+import ReportDetailScreen from './src/screens/ReportDetail';
 // promo screens
 import PromoListScreen from './src/screens/PromoList';
 // setting screen
@@ -159,6 +160,30 @@ const ReportNavigation = createStackNavigator(
   }
 )
 
+// report list navigation
+const ReportHistoryNavigation = createStackNavigator(
+  {
+    ReportList: {
+      screen: ReportListScreen,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: 'Riwayat Laporan',
+        headerTitleStyle: navigationHeaderTitleStyle,
+        headerStyle: navigationHeaderStyle,
+        headerLeft: <Icon name="menu" onPress={() => { navigation.openDrawer() }} size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />
+      })
+    },
+    ReportDetail: {
+      screen: ReportDetailScreen,
+        headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
+        headerTitleStyle: navigationHeaderTitleStyle,
+        headerStyle: navigationHeaderStyle
+    }
+  },
+  {
+    initialRouteName: 'ReportList'
+  }
+)
+
 // feed navigation
 const FeedNavigation = createTabNavigator(
   {
@@ -257,7 +282,7 @@ const AuthorizedNavigation = createDrawerNavigator(
     Billing: {
       screen: BillingNavigation,
       navigationOptions: {
-        title: 'Riwayat',
+        title: 'Tagihan',
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-billing.png')} />
       }
     },
@@ -266,6 +291,13 @@ const AuthorizedNavigation = createDrawerNavigator(
       navigationOptions: {
         title: 'Layanan',
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-service.png')} />
+      }
+    },
+    ReportHistory: {
+      screen: ReportHistoryNavigation,
+      navigationOptions: {
+        title: 'Riwayat',
+        drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-history.png')} />
       }
     },
     Setting: {
