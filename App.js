@@ -49,9 +49,9 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     
-    // if(env.APP_ENV == 'development'){
-    //   this.injectUserToken();
-    // }
+    if(env.APP_ENV == 'development'){
+      this.injectUserToken();
+    }
   }
   
   // development only
@@ -64,7 +64,7 @@ export default class App extends React.Component {
         email: "irwandi@gmail.com",
         phone: "0811232769",
         unit: "W/19/WH",
-        token: "498056111f2978f3b3cd271a84cba48f64e2adb3fbaace43cb07f20c830e0dfc9ffd8e901fabeecac447f2ffbdc9e8f929be1f03ae9f6f8d45b8f66d8b9fca7d"
+        token: "689385b215b7bd66c0351c9d5d267eb503fda35541f56a0af898127a23a145612b3ad4ab77792f070aaaa396ae75cfe98afe86a62fb41664fa09bedaed646f97"
       }
     )
   }
@@ -174,9 +174,11 @@ const ReportHistoryNavigation = createStackNavigator(
     },
     ReportDetail: {
       screen: ReportDetailScreen,
+      navigationOptions: {
         headerBackImage: <Icon name="arrow-back" size={24} color="#FFFFFF" style={{ marginLeft: 10 }} />,
         headerTitleStyle: navigationHeaderTitleStyle,
         headerStyle: navigationHeaderStyle
+      }
     }
   },
   {

@@ -65,7 +65,7 @@ export default class BillingDetailScreen extends React.Component {
                 })
               } else {
                 console.log(responseBody.message);
-                Alert.alert('Gagal Mengambil Berita', responseBody.message)
+                Alert.alert('Gagal Mengambil Detail Tagihan', responseBody.message)
               }
             })
           })
