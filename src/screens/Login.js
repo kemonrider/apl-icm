@@ -32,47 +32,59 @@ export default class LoginScreen extends React.Component {
     }
   }
 
-  onFormSubmit = () => {
-    if(this.state.formSubmitting){
+  validateForm = () => {
+    if(this.state.username && this.state.password){
+      return true
+    } else {
       return false
     }
-    
-    if(!this.state.formSubmitting){
-      this.setState({
-        formError: false,
-        formErrorMessage: '',
-        formSubmitting: true
-      });
-
-      const userAuth = {
-        email: this.state.username,
-        password: this.state.password
+  }
+  
+  onFormSubmit = () => {
+    if(!this.validateForm()){
+      Alert.alert('Form tidak lengkap', 'Isi username dan password Anda')
+    } else {
+      if(this.state.formSubmitting){
+        return false
       }
       
-      fetch(`${env.ENDPOINT}/api/auth/login`, {
-        method: 'POST',
-        headers: new Headers({
-          'Accept-Encoding': 'application/json',
-          'Content-Type': 'application/json',
-        }),
-        body: JSON.stringify(userAuth)
-      })
-        .then(response => {
-          this.setState({
-            formSubmitting: false
-          })
-          response.json().then(responseBody => {
-            if(response.status === 200){
-              this.handleLoginSuccess(responseBody);
-            } else {
-              this.handleLoginFailed(responseBody);
-            }
-          })
+      if(!this.state.formSubmitting){
+        this.setState({
+          formError: false,
+          formErrorMessage: '',
+          formSubmitting: true
+        });
+
+        const userAuth = {
+          email: this.state.username,
+          password: this.state.password
+        }
+        
+        fetch(`${env.ENDPOINT}/api/auth/login`, {
+          method: 'POST',
+          headers: new Headers({
+            'Accept-Encoding': 'application/json',
+            'Content-Type': 'application/json',
+          }),
+          body: JSON.stringify(userAuth)
         })
-        .catch(error => {
-          alert(error);
-        })
-        .done()
+          .then(response => {
+            this.setState({
+              formSubmitting: false
+            })
+            response.json().then(responseBody => {
+              if(response.status === 200){
+                this.handleLoginSuccess(responseBody);
+              } else {
+                this.handleLoginFailed(responseBody);
+              }
+            })
+          })
+          .catch(error => {
+            alert(error);
+          })
+          .done()
+      }
     }
   }
   
