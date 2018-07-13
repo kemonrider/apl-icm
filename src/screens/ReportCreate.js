@@ -41,6 +41,14 @@ export default class ReportCreateScreen extends React.Component {
     });
   }
 
+  validateForm = () => {
+    if(this.state.formTitle && this.state.formContent){
+      return true
+    } else {
+      return false
+    }
+  }
+  
   selectImage = () => {
     var options = {
       title: 'Pilih Gambar',
@@ -75,10 +83,14 @@ export default class ReportCreateScreen extends React.Component {
   onFormSubmit = async () => {
     if(!this.state.pageLoading){
       try {
-        console.log('Submitting form');
+        if(!this.validateForm()) {
+          throw({ code: 'not valid', message: 'Harap lengkapi laporan Anda' })
+        }
+        
         this.setState({
           pageLoading: true
         });
+
 
         const report = {
           cat_id: this.state.reportId,
@@ -122,7 +134,7 @@ export default class ReportCreateScreen extends React.Component {
           })
       } catch (error) {
         console.log(error);
-        Alert.alert('Gagal Mengirim Laporan', JSON.stringify(error));
+        Alert.alert('Gagal Mengirim Laporan', error.message);
       }
     }
   }
