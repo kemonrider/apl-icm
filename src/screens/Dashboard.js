@@ -1,5 +1,6 @@
 import React from 'react';
-import { ScrollView, ActivityIndicator, View, Alert, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, ActivityIndicator, View, Alert, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import ImageSlider from 'react-native-image-slider';
 
 import News from '../components/News';
 
@@ -142,11 +143,22 @@ export default class DashboardScreen extends React.Component {
     }
   }
   
+  setSliderHeight = (width) => {
+    return width / 2
+  }
+  
   renderBilling = () => {
     if(this.state.unpaidBill){
       return (
         <View style={styles.billingWrapper}>
-          <Image source={require('../assets/images/sample-dashboard.jpg')} />
+          {/* <Image source={require('../assets/images/sample-dashboard.jpg')} /> */}
+          <View style={{ height: this.setSliderHeight(Dimensions.get('window').width) }}>
+            <ImageSlider images={[
+              'https://placeimg.com/640/320/arch',
+              'https://placeimg.com/640/320/arch',
+              'https://placeimg.com/640/320/arch'
+            ]}/>
+          </View>
           <View style={styles.billingDetail}>
             <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <TouchableOpacity
