@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Image, Text, StyleSheet, ScrollView, ActivityIndicator, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import HTMLView from 'react-native-htmlview';
 
@@ -95,13 +95,17 @@ export default class NewsDetailScreen extends React.Component {
     }
   }
   
+  setImageHeight = (windowWidth) => {
+    return windowWidth / ( 16 / 9 )
+  }
+  
   renderNewsDetail() {
     if(!this.state.pageLoading) {
       return (
         <View>
           <View style={styles.pageHeader}>
             <Image 
-              style={{ width: '100%', height: 200 }}
+              style={{ width: '100%', height: this.setImageHeight(Dimensions.get('window').width) }}
               source={{ uri: this.state.newsImage}}
             />
           </View>

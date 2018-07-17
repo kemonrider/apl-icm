@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity, Alert, Share } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity, Alert, Share, Dimensions } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -13,7 +13,7 @@ export default class News extends React.Component {
 
     this.state = {
       width: '100%',
-      height: 200,
+      height: this.setImageHeight(Dimensions.get('window').width),
       is_fav: this.props.is_fav
     }
   }
@@ -30,7 +30,7 @@ export default class News extends React.Component {
         />
       )
     } else {
-      return <Image style={{ width: '100%' }} source={require('../../assets/images/news/sample-news-image.jpg')} />
+      return <Image style={{ width: '100%', height: this.setImageHeight(Dimensions.get('window').width) }} source={require('../../assets/images/news/sample-news-image.jpg')} />
     }
   }
 
@@ -73,6 +73,10 @@ export default class News extends React.Component {
     })
   }
   
+  setImageHeight = (windowWidth) => {
+    return windowWidth / ( 16 / 9 )
+  }
+  
   render(){
     return (
       <View style={styles.newsWrapper}>
@@ -84,7 +88,7 @@ export default class News extends React.Component {
               <Text style={styles.newsTitle}>{this.props.judul}</Text>
             </View>
             <View style={styles.newsGradient}>
-              <Image style={{ width: '100%' }} source={require('../../assets/images/news/news-image-overlay.png')} />
+              <Image style={{ width: '100%', height: this.setImageHeight(Dimensions.get('window').width) }} source={require('../../assets/images/news/news-image-overlay.png')} />
             </View>
             <View style={styles.newsImage}>
               {this.getNewsImage()}

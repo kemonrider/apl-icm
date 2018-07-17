@@ -143,8 +143,8 @@ export default class DashboardScreen extends React.Component {
     }
   }
   
-  setSliderHeight = (width) => {
-    return width / 2
+  setSliderHeight = (windowWidth) => {
+    return windowWidth / ( 16 / 9 )
   }
   
   renderBilling = () => {
@@ -154,9 +154,9 @@ export default class DashboardScreen extends React.Component {
           {/* <Image source={require('../assets/images/sample-dashboard.jpg')} /> */}
           <View style={{ height: this.setSliderHeight(Dimensions.get('window').width) }}>
             <ImageSlider images={[
-              'https://placeimg.com/640/320/arch',
-              'https://placeimg.com/640/320/arch',
-              'https://placeimg.com/640/320/arch'
+              'https://placeimg.com/1024/576/arch',
+              'https://placeimg.com/1024/576/arch',
+              'https://placeimg.com/1024/576/arch'
             ]}/>
           </View>
           <View style={styles.billingDetail}>
