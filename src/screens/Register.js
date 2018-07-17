@@ -16,7 +16,7 @@ export default class RegisterScreen extends React.Component {
       password: '',
       phone: '',
       unit: '',
-      site: 'Mediterania Garden Residence',
+      site: 'Mediterania Garden Residence 2',
       formValid: false,
       formError: false,
       formErrorTitle: 'Gagal Registrasi',
