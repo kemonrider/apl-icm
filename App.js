@@ -221,9 +221,9 @@ const FeedNavigation = createTabNavigator(
 )
 
 // Home Navigation
-const HomeNavigation = createStackNavigator(
+const HomeFeedNavigation = createStackNavigator(
   {
-    Home: {
+    HomeFeed: {
       screen: FeedNavigation,
       navigationOptions: ({ navigation }) => ({
         headerTitle: 'Newsfeed',
@@ -289,8 +289,8 @@ const AuthorizedNavigation = createDrawerNavigator(
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-home.png')} />
       }
     },
-    Home: {
-      screen: HomeNavigation,
+    Feed: {
+      screen: HomeFeedNavigation,
       navigationOptions: {
         title: 'Newsfeed',
         drawerIcon: <Image source={require('./src/assets/images/drawer/drawer-newsfeed.png')} />

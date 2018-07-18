@@ -16,13 +16,15 @@ export default class DashboardScreen extends React.Component {
       pageLoading: false,
       billingList: [],
       unpaidBill: null,
-      newsList: []
+      newsList: [],
+      bannerImages: []
     }
   }
 
   componentDidMount(){
     this.getNewsFeed()
     this.getBillingList()
+    this.getBannerImages()
   }
 
   getBillingList = async () => {
@@ -116,6 +118,43 @@ export default class DashboardScreen extends React.Component {
     }
   }
   
+  getBannerImages = async () => {
+    if(!this.state.bannerImages.length){
+      try {
+        this.setState({ pageLoading: true });
+        
+        let userToken = await appStorage.getItem(storageConst.user);
+        userToken = JSON.parse(userToken).token;
+        
+        fetch(`${env.ENDPOINT}/api/banner`, {
+          method: 'GET',
+          headers: new Headers({
+            'Accept-Encoding': 'application/json',
+            'Content-Type': 'application/json',
+            'Token': userToken
+          })
+        })
+          .then(response => {
+            this.setState({ pageLoading: false });
+            response.json().then(responseBody => {
+              if(response.status === 401){
+                appStorage.clearItem();
+                this.props.navigation.navigate('NotAuthorized');
+              }
+              if(response.status === 200){
+                this.setState({ bannerImages: responseBody.data })
+              } else {
+                Alert.alert('Gagal Mengambil Berita', responseBody.message)
+              }
+            })
+          })
+      } catch (error) {
+        console.log(error);
+        Alert.alert('Gagal Mengambil Berita', JSON.stringify(error))
+      }
+    }
+  }
+  
   renderNewsFeed() {
     if(this.state.newsList.length){
       const renderedNewsList = [];
@@ -133,6 +172,14 @@ export default class DashboardScreen extends React.Component {
     }
   }
 
+  renderBanner = () => {
+    if(this.state.bannerImages.length){
+      return (
+        <ImageSlider images={this.state.bannerImages}/>
+      )
+    }
+  }
+  
   renderActivityIndicator(){
     if(!this.state.billingList.length && !this.state.newsList.length){
       return (
@@ -151,13 +198,8 @@ export default class DashboardScreen extends React.Component {
     if(this.state.unpaidBill){
       return (
         <View style={styles.billingWrapper}>
-          {/* <Image source={require('../assets/images/sample-dashboard.jpg')} /> */}
           <View style={{ height: this.setSliderHeight(Dimensions.get('window').width) }}>
-            <ImageSlider images={[
-              'https://placeimg.com/1024/576/arch',
-              'https://placeimg.com/1024/576/arch',
-              'https://placeimg.com/1024/576/arch'
-            ]}/>
+            {this.renderBanner()}
           </View>
           <View style={styles.billingDetail}>
             <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

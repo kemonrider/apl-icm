@@ -90,7 +90,7 @@ export default class LoginScreen extends React.Component {
   
   handleLoginSuccess = async (data) => {
     await appStorage.setItem(storageConst.user, data.data);
-    this.props.navigation.navigate('Home');
+    this.props.navigation.navigate('Dashboard');
   }
 
   handleLoginFailed = (data) => {
