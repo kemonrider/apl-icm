@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, Alert, Text, TextInput, View, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Alert, Text, TextInput, View, Image, ScrollView, StyleSheet, TouchableOpacity, PermissionsAndroid } from 'react-native';
 
 import FormLabel from '../components/Form/Label';
 

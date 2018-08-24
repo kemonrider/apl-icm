@@ -1,5 +1,5 @@
 export const env = {
   APP_ENV: 'development',
-  ENDPOINT: 'https://citadel.phybox.com',
+  ENDPOINT: 'https://icm.kofera.com',
   NEWS_DEFAULT_LENGTH: 5
 }
