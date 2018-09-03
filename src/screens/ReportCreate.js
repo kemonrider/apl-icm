@@ -146,7 +146,7 @@ export default class ReportCreateScreen extends React.Component {
 
         const attachImage = {
           id: this.state.formReportId,
-          file: `data:image/jpeg;base64,${this.state.formImages[0].data}`
+          file: `data:image/jpeg;base64,${this.state.formImages[imageNumber].data}`
         }
         
         let userToken = await appStorage.getItem(storageConst.user);

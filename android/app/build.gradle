@@ -100,15 +100,15 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 27
     buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.innercitymanagement"
         minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.1"
+        targetSdkVersion 27
+        versionCode 3
+        versionName "1.2"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
