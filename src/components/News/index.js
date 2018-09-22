@@ -1,39 +1,124 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity, Alert, Share, Dimensions } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const News = props => {
-  return (
-    <View style={styles.newsWrapper}>
-      <View style={styles.newsMain}>
-        <View style={styles.newsTitleWrapper}>
-          <Text style={styles.newsTitle}>{props.title}</Text>
+import { colors } from '../../lib/styles';
+import { env } from '../../lib/environment';
+import { appStorage, storageConst } from '../../lib/storage';
+
+export default class News extends React.Component {  
+  constructor(props){
+    super(props);
+
+    this.state = {
+      width: '100%',
+      height: this.setImageHeight(Dimensions.get('window').width),
+      is_fav: this.props.is_fav
+    }
+  }
+  
+  getNewsImage = () => {
+    if(this.props.image_url){
+      return (
+        <Image
+          style={{
+            width: this.state.width, 
+            height: this.state.height
+          }}
+          source={{uri: this.props.image_url}}
+        />
+      )
+    } else {
+      return <Image style={{ width: '100%', height: this.setImageHeight(Dimensions.get('window').width) }} source={require('../../assets/images/news/sample-news-image.jpg')} />
+    }
+  }
+
+  onFav = async () => {
+    try {      
+      let userToken = await appStorage.getItem(storageConst.user);
+      userToken = JSON.parse(userToken).token;
+      
+      const favAction = ( this.state.is_fav == '0' ? 'favorite' : 'unfavorite' );
+      
+      fetch(`${env.ENDPOINT}/api/newsfeed/${favAction}/${this.props.id}`, {
+        method: 'POST',
+        headers: new Headers({
+          'Accept-Encoding': 'application/json',
+          'Content-Type': 'application/json',
+          'Token': userToken
+        })
+      })
+        .then(response => {
+          response.json().then(responseBody => {
+            if(this.state.is_fav == '0'){
+              this.setState({ is_fav : '1' })
+            } else {
+              this.setState({ is_fav : '0' })
+            }
+          })
+        })
+    } catch ( error ) {
+      console.log(error);
+      Alert.alert('Gagal Like / Unlike berita', error.message);
+    }
+  }
+
+  onShare = () => {
+    const messageToShare = `${this.props.judul} \n ${this.props.ringkasan} \n ${this.props.link}`
+    Share.share({ 
+      message: messageToShare,
+      title: this.props.judul,
+      url: this.props.link 
+    })
+  }
+  
+  setImageHeight = (windowWidth) => {
+    return windowWidth / ( 16 / 9 )
+  }
+  
+  render(){
+    return (
+      <View style={styles.newsWrapper}>
+        <View style={styles.newsMain}>
+          <TouchableOpacity
+            onPress={this.props.onLink}
+          >
+            <View style={styles.newsTitleWrapper}>
+              <Text style={styles.newsTitle}>{this.props.judul}</Text>
+            </View>
+            <View style={styles.newsGradient}>
+              <Image style={{ width: '100%', height: this.setImageHeight(Dimensions.get('window').width) }} source={require('../../assets/images/news/news-image-overlay.png')} />
+            </View>
+            <View style={styles.newsImage}>
+              {this.getNewsImage()}
+            </View>
+          </TouchableOpacity>
         </View>
-        <View style={styles.newsGradient}>
-          <Image source={require('../../assets/images/news/news-image-overlay.png')} />
-        </View>
-        <View style={styles.newsImage}>
-          <Image source={require('../../assets/images/news/sample-news-image.jpg')} />
+        <View style={styles.newsFooter}>
+          <View style={styles.newsTagWrapper}>
+            <Icon name="local-offer" size={iconStyle.size} />
+            <Text style={styles.newsTag}> {this.props.tag} </Text>
+          </View>
+          <View style={{ flex: 0.25 }}></View>
+          <View style={styles.newsLikeWrapper}>
+            <TouchableOpacity
+              onPress={() => this.onFav()}
+            >
+              <Text style={styles.newsLike}> <Icon name="favorite" color={ (this.state.is_fav == 1) ? colors.secondary : null } size={iconStyle.size} /> Suka </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.newsShareWrapper}>
+            <TouchableOpacity
+              onPress={() => this.onShare()}
+            >
+              <Text style={styles.newsShare}><Icon name="share" size={iconStyle.size} /> Bagikan </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-      <View style={styles.newsFooter}>
-        <View style={styles.newsTagWrapper}>
-          <Icon name="local-offer" size={iconStyle.size} />
-          <Text style={styles.newsTag}> {props.tag} </Text>
-        </View>
-        <View style={{ flex: 0.25 }}></View>
-        <View style={styles.newsLikeWrapper}>
-          <Icon name="favorite" size={iconStyle.size} />
-          <Text style={styles.newsLike}> Suka </Text>
-        </View>
-        <View style={styles.newsShareWrapper}>
-          <Icon name="share" size={iconStyle.size} />
-          <Text style={styles.newsShare}> Bagikan </Text>
-        </View>
-      </View>
-    </View>
-  )
+    )
+  }
 };
 
 const iconStyle = {
@@ -97,5 +182,3 @@ const styles = StyleSheet.create({
   },
   newsShare: {}
 });
-
-export default News;
