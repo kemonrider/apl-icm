@@ -58,20 +58,30 @@ export default class BillingHistoryScreen extends React.Component {
   }
   
   renderBillingHistory() {
-    const renderedBillingHistory = [];
-    this.state.billingHistory.map( bill => {
-      renderedBillingHistory.push(
-        <TouchableOpacity
-          key={bill.id}
-          onPress={() => {this.props.navigation.navigate('BillingDetail', { billingId: bill.id, billingType: bill.type })}}
-        >
-          <Billing
-            {...bill}
-          />
-        </TouchableOpacity>
-      )
-    })
-    return renderedBillingHistory;
+    if(!this.state.pageLoading){    
+      if(this.state.billingHistory.length > 0){
+        const renderedBillingHistory = [];
+        this.state.billingHistory.map( bill => {
+          renderedBillingHistory.push(
+            <TouchableOpacity
+            key={bill.id}
+            onPress={() => {this.props.navigation.navigate('BillingDetail', { billingId: bill.id, billingType: bill.type })}}
+            >
+            <Billing
+              {...bill}
+              />
+          </TouchableOpacity>
+          )
+        })
+        return renderedBillingHistory;
+      } else {
+        return (
+          <View>
+            <Text style={styles.noBilling}>No billing yet</Text>
+          </View>
+        )
+      }
+    }
   }
   
   renderActivityIndicator(){
@@ -96,4 +106,9 @@ export default class BillingHistoryScreen extends React.Component {
 
 const styles = StyleSheet.create({
   pageWrapper: {},
+  noBilling: {
+    fontSize: 24,
+    marginTop: 20,
+    textAlign: 'center'
+  }
 })
