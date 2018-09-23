@@ -236,6 +236,7 @@ const styles = StyleSheet.create({
   },
   billingDetail: {
     paddingVertical: 15,
+    backgroundColor: "#FFFFFF"
   },
   billingTitle: {
     fontSize: 10

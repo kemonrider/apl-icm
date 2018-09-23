@@ -159,7 +159,8 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
     padding: 15,
     width: '100%',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    backgroundColor: "#FFFFFF"
   },
   newsTagWrapper: {
     flexDirection: 'row',
