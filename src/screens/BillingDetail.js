@@ -59,13 +59,11 @@ export default class BillingDetailScreen extends React.Component {
                 this.props.navigation.navigate('NotAuthorized');
               }
               if(response.status === 200){
-                console.log(responseBody.data[0])
                 this.setState({
                   billingDetail: responseBody.data[0],
                   pageLoading: false
                 })
               } else {
-                // console.log(responseBody.message);
                 Alert.alert('Gagal Mengambil Detail Tagihan', responseBody.message)
               }
             })
@@ -86,41 +84,41 @@ export default class BillingDetailScreen extends React.Component {
       return (
         <View style={styles.billingBody}>
           <View style={styles.invoiceHeader}>
-          <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Invoice</Text>
+            <View style={{ flexDirection: 'row'}}>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>Invoice</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.invoice}</Text>
               </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Unit</Text>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>Unit</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.unit}</Text>
               </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA BCA</Text>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>VA BCA</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_bca}</Text>
               </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA Mandiri</Text>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>VA Mandiri</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_mandiri}</Text>
               </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA Permata</Text>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>VA Permata</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_permata}</Text>
@@ -171,48 +169,45 @@ export default class BillingDetailScreen extends React.Component {
         <View style={styles.billingBody}>
           <View style={styles.invoiceHeader}>
             <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Invoice</Text>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>Invoice</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.invoice}</Text>
               </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Unit</Text>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>Unit</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.unit}</Text>
               </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA BCA</Text>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>VA BCA</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_bca}</Text>
               </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA Mandiri</Text>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>VA Mandiri</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_mandiri}</Text>
               </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <View>
-                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA Permata</Text>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>VA Permata</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_permata}</Text>
               </View>
             </View>
-            {/* <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Jatuh Tempo</Text><Text style={{ fontSize: 10 }}>-- JATUH TEMPO --</Text>
-            </View> */}
           </View>
           <View style={styles.tableWrapper}>
             <View style={styles.tableHeader}>
