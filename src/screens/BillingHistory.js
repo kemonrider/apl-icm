@@ -44,7 +44,11 @@ export default class BillingHistoryScreen extends React.Component {
             this.setState({ pageLoading: false });
             response.json().then(responseBody => {
               if(response.status === 200){
-                this.setState({ billingHistory: responseBody.data })
+                if(responseBody.data){
+                  this.setState({ billingHistory: responseBody.data })
+                } else {
+                  this.setState({ billingHistory: [] })
+                }
               } else {
                 Alert.alert('Gagal Mengambil Riwayat Tagihan', responseBody.message)
               }
