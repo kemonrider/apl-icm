@@ -59,12 +59,13 @@ export default class BillingDetailScreen extends React.Component {
                 this.props.navigation.navigate('NotAuthorized');
               }
               if(response.status === 200){
+                console.log(responseBody.data[0])
                 this.setState({
                   billingDetail: responseBody.data[0],
                   pageLoading: false
                 })
               } else {
-                console.log(responseBody.message);
+                // console.log(responseBody.message);
                 Alert.alert('Gagal Mengambil Detail Tagihan', responseBody.message)
               }
             })
@@ -85,15 +86,45 @@ export default class BillingDetailScreen extends React.Component {
       return (
         <View style={styles.billingBody}>
           <View style={styles.invoiceHeader}>
-            <Text style={{ fontSize: 12, fontWeight: '600', marginBottom: 10 }}>Invoice</Text>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Unit</Text><Text style={{ fontSize: 10 }}>{this.state.billingDetail.unit}</Text>
+          <View style={{ flexDirection: 'row' }}>
+              <View>
+                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Invoice</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.invoice}</Text>
+              </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Nomer</Text><Text style={{ fontSize: 10 }}>{this.state.billingId}</Text>
+              <View>
+                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Unit</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.unit}</Text>
+              </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Tanggal</Text><Text style={{ fontSize: 10 }}>{this.state.billingDetail.bill_date}</Text>
+              <View>
+                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA BCA</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_bca}</Text>
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+              <View>
+                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA Mandiri</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_mandiri}</Text>
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+              <View>
+                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA Permata</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_permata}</Text>
+              </View>
             </View>
           </View>
           <View style={styles.tableWrapper}>
@@ -110,16 +141,26 @@ export default class BillingDetailScreen extends React.Component {
             </View>
             <View style={styles.tableBody}>
               <View style={styles.tableRow}>
-                <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>{this.state.billingDetail.bill_maintenance_note}</Text></View>
-                <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
+                <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Tagihan bulan ini</Text></View>
+                <View style={styles.tableCellCenter}><Text style={styles.tableCellText}>{this.state.billingDetail.bill_maintenance_note}</Text></View>
                 <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_maintenance_total)}</Text></View>
+              </View>
+              <View style={styles.tableRow}>
+                <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Tunggakan Yang Belum Dibayar</Text></View>
+                <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
+                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_maintenance_extra)}</Text></View>
+              </View>
+              <View style={styles.tableRow}>
+                <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Denda dari tunggakan</Text></View>
+                <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
+                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_maintenance_extra2)}</Text></View>
               </View>
             </View>
             <View style={styles.tableFooter}>
               <View style={{ width: '100%', flexDirection: 'row', alignItems: 'flex-end' }}>
                 <View style={{ width: '40%'}}></View>
                 <View style={{ width: '30%', paddingLeft: 10, paddingVertical: 5, backgroundColor: 'rgba(69,37,131, 0.06)' }}><Text style={styles.tableFooterText}>Total</Text></View>
-                <View style={{ width: '30%', paddingVertical: 5, backgroundColor: 'rgba(69,37,131, 0.06)', alignItems: 'flex-end', paddingRight: 30 }}><Text style={styles.tableFooterText}>Rp. {this.numberWithCommas(this.state.billingDetail.total)}</Text></View>
+                <View style={{ width: '30%', paddingVertical: 5, backgroundColor: 'rgba(69,37,131, 0.06)', alignItems: 'flex-end', paddingRight: 30 }}><Text style={styles.tableFooterText}>Rp. {this.numberWithCommas(Number(this.state.billingDetail.total) + Number(this.state.billingDetail.bill_maintenance_extra) + Number(this.state.billingDetail.bill_maintenance_extra2))}</Text></View>
               </View>
             </View>
           </View>
@@ -266,7 +307,7 @@ export default class BillingDetailScreen extends React.Component {
                       {(
                         () => {
                           if(this.state.billingType.toLowerCase() == 'maintenance') {
-                            return 'Tagihan Maintenance'
+                            return 'Tagihan Pemeliharaan Lingkungan'
                           } else {
                             return 'Tagihan Listrik dan Air'
                           }
