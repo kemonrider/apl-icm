@@ -129,16 +129,49 @@ export default class BillingDetailScreen extends React.Component {
       return (
         <View style={styles.billingBody}>
           <View style={styles.invoiceHeader}>
-            <Text style={{ fontSize: 12, fontWeight: '600', marginBottom: 10 }}>Invoice</Text>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Unit</Text><Text style={{ fontSize: 10 }}>{this.state.billingDetail.unit}</Text>
+              <View>
+                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Invoice</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.invoice}</Text>
+              </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Nomer</Text><Text style={{ fontSize: 10 }}>{this.state.billingId}</Text>
+              <View>
+                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Unit</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.unit}</Text>
+              </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Tanggal</Text><Text style={{ fontSize: 10 }}>{this.state.billingDetail.bill_date}</Text>
+              <View>
+                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA BCA</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_bca}</Text>
+              </View>
             </View>
+            <View style={{ flexDirection: 'row' }}>
+              <View>
+                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA Mandiri</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_mandiri}</Text>
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+              <View>
+                <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>VA Permata</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_permata}</Text>
+              </View>
+            </View>
+            {/* <View style={{ flexDirection: 'row' }}>
+              <Text style={{ fontSize: 10, fontWeight: '600', width: 50 }}>Jatuh Tempo</Text><Text style={{ fontSize: 10 }}>-- JATUH TEMPO --</Text>
+            </View> */}
           </View>
           <View style={styles.tableWrapper}>
             <View style={styles.tableHeader}>
@@ -156,7 +189,7 @@ export default class BillingDetailScreen extends React.Component {
               <View style={styles.tableRow}>
                 <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>{this.state.billingDetail.bill_power_note}</Text></View>
                 <View style={styles.tableCellCenter}><Text style={styles.tableCellText}>start: {this.state.billingDetail.power_meter_start} - end: {this.state.billingDetail.power_meter_end}</Text></View>
-                <View style={styles.tableCellRight}><Text style={styles.tableCellText}></Text></View>
+                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_power_total)}</Text></View>
               </View>
               <View style={styles.tableRow}>
                 <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>PJU</Text></View>
@@ -171,13 +204,13 @@ export default class BillingDetailScreen extends React.Component {
               <View style={styles.tableRow}>
                 <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>SUBTOTAL</Text></View>
                 <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
-                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_power_total)}</Text></View>
+                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(Number(this.state.billingDetail.bill_power_total) + Number(this.state.billingDetail.bill_public_light) + Number(this.state.billingDetail.bill_power_extra))}</Text></View>
               </View>
               <View style={{ width: '100%', marginBottom: 15 }}></View>
               <View style={styles.tableRow}>
-                <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>{this.state.billingDetail.bill_power_note}</Text></View>
+                <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>{this.state.billingDetail.bill_water_note}</Text></View>
                 <View style={styles.tableCellCenter}><Text style={styles.tableCellText}>start: {this.state.billingDetail.water_meter_start} - end: {this.state.billingDetail.water_meter_end}</Text></View>
-                <View style={styles.tableCellRight}><Text style={styles.tableCellText}></Text></View>
+                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_water_total)}</Text></View>
               </View>
               <View style={styles.tableRow}>
                 <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Biaya Tambahan</Text></View>
@@ -187,7 +220,7 @@ export default class BillingDetailScreen extends React.Component {
               <View style={styles.tableRow}>
                 <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>SUBTOTAL</Text></View>
                 <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
-                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_water_total)}</Text></View>
+                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(Number(this.state.billingDetail.bill_water_total) + Number(this.state.billingDetail.bill_power_extra))}</Text></View>
               </View>
             </View>
             <View style={styles.tableFooter}>
