@@ -54,6 +54,7 @@ export default class BillingDetailScreen extends React.Component {
         })
           .then(response => {
             response.json().then(responseBody => {
+              console.log(responseBody);
               if(response.status === 401){
                 appStorage.clearItem();
                 this.props.navigation.navigate('NotAuthorized');
@@ -122,6 +123,14 @@ export default class BillingDetailScreen extends React.Component {
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_permata}</Text>
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>Jatuh Tempo</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.bill_date.slice(0,-2) + '15'}</Text>
               </View>
             </View>
           </View>
@@ -206,6 +215,14 @@ export default class BillingDetailScreen extends React.Component {
               </View>
               <View>
                 <Text style={{ fontSize: 10 }}>{this.state.billingDetail.va_permata}</Text>
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+              <View style={{ width: '30%' }}>
+                <Text style={{ fontSize: 10, fontWeight: '600' }}>Jatuh Tempo</Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.bill_date.slice(0,-2) + '15'}</Text>
               </View>
             </View>
           </View>
