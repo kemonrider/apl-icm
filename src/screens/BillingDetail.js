@@ -54,7 +54,6 @@ export default class BillingDetailScreen extends React.Component {
         })
           .then(response => {
             response.json().then(responseBody => {
-              console.log(responseBody);
               if(response.status === 401){
                 appStorage.clearItem();
                 this.props.navigation.navigate('NotAuthorized');
@@ -266,15 +265,23 @@ export default class BillingDetailScreen extends React.Component {
                 <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_water_total)}</Text></View>
               </View>
               <View style={styles.tableRow}>
-                <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Biaya Tambahan</Text></View>
+                <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Beban Tetap Air</Text></View>
                 <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
-                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_power_extra)}</Text></View>
+                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.water_fixed_bill)}</Text></View>
               </View>
               <View style={styles.tableRow}>
                 <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>SUBTOTAL</Text></View>
                 <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
                 <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(Number(this.state.billingDetail.bill_water_total) + Number(this.state.billingDetail.bill_power_extra))}</Text></View>
               </View>
+              {
+                this.state.billingDetail.bill_water_power_extra2 > 0 &&
+                <View style={styles.tableRow}>
+                  <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Denda Dari Tunggakan</Text></View>
+                  <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
+                  <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_water_power_extra2)}</Text></View>
+                </View>
+              }
             </View>
             <View style={styles.tableFooter}>
               <View style={{ width: '100%', flexDirection: 'row', alignItems: 'flex-end' }}>
@@ -361,6 +368,7 @@ export default class BillingDetailScreen extends React.Component {
   }
   
   render(){
+    console.log(this.state.billingDetail)
     if(this.state.pageLoading && !this.state.billingDetail){
       return (
         <View style={{ height: 200, alignItems: 'center', justifyContent: 'center' }}>
