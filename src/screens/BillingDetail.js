@@ -151,16 +151,22 @@ export default class BillingDetailScreen extends React.Component {
                 <View style={styles.tableCellCenter}><Text style={styles.tableCellText}>{this.state.billingDetail.bill_maintenance_note}</Text></View>
                 <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_maintenance_total)}</Text></View>
               </View>
-              <View style={styles.tableRow}>
-                <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Tunggakan Yang Belum Dibayar</Text></View>
-                <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
-                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_maintenance_extra)}</Text></View>
-              </View>
-              <View style={styles.tableRow}>
-                <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Denda dari tunggakan</Text></View>
-                <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
-                <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_maintenance_extra2)}</Text></View>
-              </View>
+              {
+                this.state.billingDetail.bill_maintenance_extra > 0 &&
+                <View style={styles.tableRow}>
+                  <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Tunggakan Yang Belum Dibayar</Text></View>
+                  <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
+                  <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_maintenance_extra)}</Text></View>
+                </View>
+              }
+              {
+                this.state.billingDetail.bill_maintenance_extra2 > 0 &&
+                <View style={styles.tableRow}>
+                  <View style={styles.tableCellLeft}><Text style={styles.tableCellText}>Denda dari tunggakan</Text></View>
+                  <View style={styles.tableCellCenter}><Text style={styles.tableCellText}></Text></View>
+                  <View style={styles.tableCellRight}><Text style={styles.tableCellText}>Rp {this.numberWithCommas(this.state.billingDetail.bill_maintenance_extra2)}</Text></View>
+                </View>
+              }
             </View>
             <View style={styles.tableFooter}>
               <View style={{ width: '100%', flexDirection: 'row', alignItems: 'flex-end' }}>
