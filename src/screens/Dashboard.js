@@ -59,7 +59,7 @@ export default class DashboardScreen extends React.Component {
                   }
                 })
 
-                console.log(unpaidBill);
+                // console.log(unpaidBill);
                 
                 this.setState({ 
                   unpaidBill: unpaidBill,
