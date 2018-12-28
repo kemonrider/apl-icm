@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, ActivityIndicator, View, Alert, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { ScrollView, ActivityIndicator, View, Alert, Text, AsyncStorage, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 
 import News from '../components/News';
@@ -105,6 +105,8 @@ export default class DashboardScreen extends React.Component {
                 this.props.navigation.navigate('NotAuthorized');
               }
               if(response.status === 200){
+                // save items to storage
+                onNewsList(responseBody);
                 this.setState({ newsList: responseBody })
               } else {
                 Alert.alert('Gagal Mengambil Berita', responseBody.message)
@@ -113,6 +115,29 @@ export default class DashboardScreen extends React.Component {
           })
       } catch (error) {
         console.log(error);
+        onNewsError(error);
+      }
+    }
+
+    // on news list
+    const onNewsList = async (newsList) => {
+      try {
+        await AsyncStorage.setItem( 'newsContent', JSON.stringify(newsList) );
+        // for debugging purpose only
+        // const list = await AsyncStorage.getItem('newsContent')
+        // console.log( list );
+      } catch(error) {
+        console.log(error);
+      }
+    }
+
+    // on news error
+    const onNewsError = async (error) => {
+      try {
+        const newsList = await AsyncStorage.getItem('newsContent');
+        this.setState({ newsList: JSON.parse(newsList) });
+      } catch(err) {
+        console.log(err);
         Alert.alert('Gagal Mengambil Berita', JSON.stringify(error))
       }
     }
