@@ -129,7 +129,7 @@ export default class BillingDetailScreen extends React.Component {
                 <Text style={{ fontSize: 10, fontWeight: '600' }}>Jatuh Tempo</Text>
               </View>
               <View>
-                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.bill_date.slice(0,-2) + '15'}</Text>
+                <Text style={{ fontSize: 10 }}>15{this.state.billingDetail.bill_date.slice(-7)}</Text>
               </View>
             </View>
           </View>
@@ -227,7 +227,7 @@ export default class BillingDetailScreen extends React.Component {
                 <Text style={{ fontSize: 10, fontWeight: '600' }}>Jatuh Tempo</Text>
               </View>
               <View>
-                <Text style={{ fontSize: 10 }}>{this.state.billingDetail.bill_date.slice(0,-2) + '15'}</Text>
+                <Text style={{ fontSize: 10 }}>15{this.state.billingDetail.bill_date.slice(-7)}</Text>
               </View>
             </View>
           </View>
