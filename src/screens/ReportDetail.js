@@ -89,7 +89,7 @@ export default class ReportCreateScreen extends React.Component {
   }
 
   getReportStatus = (reportStatus) => {
-    if(parseInt(reportStatus) === 1){
+    if(Number(reportStatus) === 1){
       return <Text style={{color: colors.secondary}}>SUDAH SELESAI</Text>
     } else {
       return <Text style={{color: '#D51A1A'}}>BELUM SELESAI</Text>
@@ -127,7 +127,7 @@ export default class ReportCreateScreen extends React.Component {
             </View>
             <View style={styles.formWrapper}>
               <FormLabel textColor="#999999" text="Status" />
-              {this.getReportStatus(this.state.is_finish)}
+              {this.getReportStatus(this.state.reportDetailContent[0].is_finish)}
             </View>
             {/* <View style={styles.formWrapper}>
               <FormLabel textColor="#999999" text="Foto" />

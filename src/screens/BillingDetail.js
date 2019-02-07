@@ -4,6 +4,7 @@ import { ActivityIndicator, View, ScrollView, StyleSheet, Image, Text, Alert } f
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
 import { appStorage, storageConst } from '../lib/storage';
+import { getDueDate } from '../lib/helper';
 
 export default class BillingDetailScreen extends React.Component {
   constructor(props){
@@ -129,7 +130,8 @@ export default class BillingDetailScreen extends React.Component {
                 <Text style={{ fontSize: 10, fontWeight: '600' }}>Jatuh Tempo</Text>
               </View>
               <View>
-                <Text style={{ fontSize: 10 }}>15{this.state.billingDetail.bill_date.slice(-7)}</Text>
+                {/* <Text style={{ fontSize: 10 }}>15{this.state.billingDetail.bill_date.slice(-7)}</Text> */}
+                <Text style={{ fontSize: 10 }}>{getDueDate(this.state.billingDetail.bill_date)}</Text>
               </View>
             </View>
           </View>
@@ -227,7 +229,8 @@ export default class BillingDetailScreen extends React.Component {
                 <Text style={{ fontSize: 10, fontWeight: '600' }}>Jatuh Tempo</Text>
               </View>
               <View>
-                <Text style={{ fontSize: 10 }}>15{this.state.billingDetail.bill_date.slice(-7)}</Text>
+                {/* <Text style={{ fontSize: 10 }}>15{this.state.billingDetail.bill_date.slice(-7)}</Text> */}
+                <Text style={{ fontSize: 10 }}>{getDueDate(this.state.billingDetail.bill_date)}</Text>
               </View>
             </View>
           </View>

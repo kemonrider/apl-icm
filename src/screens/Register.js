@@ -1,10 +1,12 @@
 import React from 'react';
-import { Text, View, ScrollView, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { Text, View, ScrollView, TextInput, StyleSheet, TouchableOpacity, Alert, Picker } from 'react-native';
 
 import FormLabel from '../components/Form/Label';
 
 import { colors } from '../lib/styles';
 import { env } from '../lib/environment';
+
+import { getBuildingList } from '../requests';
 
 export default class RegisterScreen extends React.Component {
   constructor(props){
@@ -16,14 +18,31 @@ export default class RegisterScreen extends React.Component {
       password: '',
       phone: '',
       unit: '',
-      site: 'Mediterania Garden Residence 2',
+      site: '',
       formValid: false,
       formError: false,
       formErrorTitle: 'Gagal Registrasi',
       formErrorMessage: '',
       formSubmitting: false,
       formSuccessTitle: 'Pendaftaran Berhasil',
-      formSuccessMessage: ''
+      formSuccessMessage: '',
+      buildingList: []
+    }
+  }
+
+  componentDidMount(){
+    this.setupBuildingList();
+  }
+
+  setupBuildingList = async () => {
+    try {
+      const buildingList = await getBuildingList();
+      this.setState({
+        buildingList: buildingList.data
+      });
+    } catch (error) {
+      console.log('error');
+      console.log(error);
     }
   }
   
@@ -39,7 +58,8 @@ export default class RegisterScreen extends React.Component {
       email: this.state.email,
       password: this.state.password,
       phone: this.state.phone,
-      unit: this.state.unit
+      unit: this.state.unit,
+      building_id: this.state.site,
     }
 
     console.log('Registering user');
@@ -94,6 +114,24 @@ export default class RegisterScreen extends React.Component {
   }
   
   render(){
+    const generateSiteList = () => {
+      let optionList = [];
+  
+      this.state.buildingList.forEach(building => {
+        optionList.push(<Picker.Item label={building.name} value={building.id} key={building.code} />);
+      });
+      
+      return (
+        <Picker
+          selectedValue={this.state.site}
+          style={{ color: '#ffffff', width: '100%' }}
+          onValueChange={(itemValue, itemIndex) => this.setState({site: itemValue})}
+        >
+          {optionList}
+        </Picker>
+      )
+    }
+    
     return(
       <ScrollView style={styles.pageWrapper}>
         <View style={styles.pageTitleWrapper}>
@@ -129,20 +167,24 @@ export default class RegisterScreen extends React.Component {
           </View>
           <FormLabel text="Site" />
           <View style={styles.textInputWrapper}>
-            <TextInput 
-              // placeholder="Unit Bangunan"
-              style={styles.textInput}
-              value={this.state.site}
-              editable={false}
-            />
+            {
+              this.state.buildingList.length > 0 &&
+              generateSiteList()
+            }
+            {
+              !this.state.buildingList.length &&
+              <TextInput 
+                style={styles.textInput}
+                onChangeText={(unit) => this.setState({unit: unit})}
+                value="Loading Site list"
+              />
+            }
           </View>
           <FormLabel text="Unit Bangunan" />
           <View style={styles.textInputWrapper}>
             <TextInput 
-              // placeholder="Unit Bangunan"
               style={styles.textInput}
               onChangeText={(unit) => this.setState({unit: unit})}
-              value={this.state.unit}
             />
           </View>
           <FormLabel text="Password" />
