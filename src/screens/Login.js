@@ -69,9 +69,6 @@ export default class LoginScreen extends React.Component {
           body: JSON.stringify(userAuth)
         })
           .then(response => {
-            this.setState({
-              formSubmitting: false
-            })
             response.json().then(responseBody => {
               if(response.status === 200){
                 this.handleLoginSuccess(responseBody);
@@ -90,13 +87,17 @@ export default class LoginScreen extends React.Component {
   
   handleLoginSuccess = async (data) => {
     await appStorage.setItem(storageConst.user, data.data);
+    this.setState({ 
+      formSubmitting: false
+    })
     this.props.navigation.navigate('Dashboard');
   }
 
   handleLoginFailed = (data) => {
     this.setState({ 
       formError: true,
-      formErrorMessage: data.message
+      formErrorMessage: data.message,
+      formSubmitting: false
     })
     Alert.alert(this.state.formErrorTitle, this.state.formErrorMessage);
   }
@@ -113,7 +114,7 @@ export default class LoginScreen extends React.Component {
           <View style={styles.textInputWrapper}>
             <TextInput 
               style={styles.textInput} 
-              onChangeText={ (text) => this.validateUsername(text) }
+              onChangeText={ (text) => this.validateUsername(text.replace(/\s/g, '')) }
               value={this.state.username}
             />
           </View>

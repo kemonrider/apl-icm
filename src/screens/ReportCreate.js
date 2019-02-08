@@ -27,6 +27,7 @@ export default class ReportCreateScreen extends React.Component {
       formImages: [],
       formReportUploadMessage: null,
       formReportId: null,
+      formLocation: '',
       pageLoading: false,
     }
   }
@@ -39,6 +40,19 @@ export default class ReportCreateScreen extends React.Component {
       reportId: navigation.getParam('reportId'),
       reportTitle: navigation.getParam('reportTitle')
     });
+    this.getUserData();
+  }
+
+  getUserData = async () => {
+    try {
+      let currentUser = await appStorage.getItem(storageConst.user);
+      currentUser = JSON.parse(currentUser);
+      this.setState({
+        formLocation: currentUser.building_name
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   validateForm = () => {
@@ -223,6 +237,13 @@ export default class ReportCreateScreen extends React.Component {
               <TextInput 
                 placeholder="Judul Aduan"
                 onChangeText={(text) => this.setState({formTitle: text})}
+              />
+            </View>
+            <View style={styles.formWrapper}>
+              <FormLabel textColor="#999999" text="Lokasi" />
+              <TextInput 
+                value={this.state.formLocation}
+                editable={false}
               />
             </View>
             <View style={styles.formWrapper}>
