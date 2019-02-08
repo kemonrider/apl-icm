@@ -32,8 +32,8 @@ export default class OnboardingScreen extends React.Component {
           {
             backgroundColor: colors.primary,
             image: <Image source={require('../assets/images/onboarding/onboarding-1.png')} />,
-            title: 'Lihat dan Bayar Tagihan',
-            subtitle: 'Lunasi tagihan listrik, air, telepon, hingga internet tanpa ribet langsung di ponsel'
+            title: 'Lihat Tagihan',
+            subtitle: 'Lihat Tagihan Utilitas Anda'
           },
           {
             backgroundColor: colors.primary,
