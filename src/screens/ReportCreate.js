@@ -29,6 +29,7 @@ export default class ReportCreateScreen extends React.Component {
       formReportId: null,
       formLocation: '',
       pageLoading: false,
+      location: '',
     }
   }
 
@@ -109,12 +110,15 @@ export default class ReportCreateScreen extends React.Component {
         const report = {
           cat_id: this.state.reportId,
           judul: this.state.formTitle,
-          aduan: this.state.formContent
+          aduan: this.state.formContent,
+          lokasi: this.state.location
         }
 
         let userToken = await appStorage.getItem(storageConst.user);
         userToken = JSON.parse(userToken).token;
 
+        console.log(report);
+        
         fetch(`${env.ENDPOINT}/api/ticket/create`, {
           method: 'POST',
           headers: new Headers({
@@ -137,7 +141,8 @@ export default class ReportCreateScreen extends React.Component {
                   formTitle: '',
                   formContent: '',
                   formReportUploadMessage: responseBody.message,
-                  formReportId: responseBody.data.id
+                  formReportId: responseBody.data.id,
+                  location: '',
                 });
                 this.submitImages(0);
               } else {
@@ -242,8 +247,9 @@ export default class ReportCreateScreen extends React.Component {
             <View style={styles.formWrapper}>
               <FormLabel textColor="#999999" text="Lokasi" />
               <TextInput 
-                value={this.state.formLocation}
-                editable={false}
+                placeholder="Lokasi"
+                onChangeText={(text) => this.setState({location: text})}
+                maxLength={255}
               />
             </View>
             <View style={styles.formWrapper}>

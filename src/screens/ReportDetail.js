@@ -64,7 +64,6 @@ export default class ReportCreateScreen extends React.Component {
                   reportDetailContent: responseBody.data,
                   pageLoading: false
                 })
-                console.log(this.state.reportDetailContent);
               } else {
                 console.log(responseBody.message);
                 Alert.alert('Gagal Mengambil Detail Laporan', responseBody.message)
